@@ -1,4 +1,4 @@
-// Load data from hours-of-tv-watched.csv
+// Load data from spotify.csv
 d3.csv("./data.df_2010.csv")
   .then(function (musicData) {
     console.log(musicData);
@@ -7,7 +7,7 @@ d3.csv("./data.df_2010.csv")
     var names = musicData.map((data) => data.name);
     console.log("names", names);
 
-    // Cast each hours value in tvData as a number using the unary + operator
+    // Cast each name in musicData as a number using the unary + operator
     musicData.forEach(function (data) {
       data.names = +data.names;
       console.log("Name:", data.name);
@@ -46,12 +46,12 @@ var chartGroup = svg
   .append("g")
   .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
 
-// Load data from hours-of-tv-watched.csv
+// Load data from df_2010.csv
 d3.csv("data.df_2010.csv")
   .then(function (musicData) {
     console.log(musicData);
 
-    // Cast the hours value to a number for each piece of tvData
+    // Cast the names to a number for each piece of musicData
     tvData.forEach(function (d) {
       d.names = +d.names;
     });
@@ -83,7 +83,7 @@ d3.csv("data.df_2010.csv")
       .attr("transform", `translate(0, ${chartHeight})`)
       .call(bottomAxis);
 
-    // Create one SVG rectangle per piece of tvData
+    // Create one SVG rectangle per piece of musicData
     // Use the linear and band scales to position each rectangle within the chart
     chartGroup
       .selectAll(".bar")
