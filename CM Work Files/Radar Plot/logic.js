@@ -1,6 +1,9 @@
 d3.csv("clean_data.csv", function (importedData) {
   var artistData = importedData;
 
+  var songID = 20;
+  var bandID = 'Ariana Grande';
+
   var bandNameAll = [];
   var songNamesAll = [];
   var songValenceAll = [];
@@ -30,21 +33,12 @@ d3.csv("clean_data.csv", function (importedData) {
     songTempoAll[i] = artistData[i].tempo;
   }
 
-  //   { axis: "Valence", value: 0.22 },
-  //   { axis: "Acousticness", value: 0.28 },
-  //   { axis: "Danceability", value: 0.29 },
-  //   { axis: "Energy", value: 0.17 },
-  //   { axis: "Explicit", value: 1 },
-  //   { axis: "Liveness", value: 0.02 },
-  //   { axis: "Loudness", value: 0.21 },
-  //   { axis: "Popularity", value: 0.5 },
-  //   { axis: "Speechiness", value: 0.2 },
-  //   { axis: "Tempo", value: 2 / 10 },
-  // console.log(songNames[3]);
   // console.log(bandName.length);
 
+
+
   for (var i = 0; i < artistData.length; i++) {
-    if (bandNameAll[i] == "The Beatles") {
+    if (bandNameAll[i] == bandID) {
       subjectindex.push(i);
     }
   }
@@ -77,21 +71,16 @@ d3.csv("clean_data.csv", function (importedData) {
     songTempo[i] = songTempoAll[subjectindex[i]];
   }
 
-//   console.log(songNames);
-//   console.log(songTempo);
   console.log(calcAverage(songValence));
   console.log(calcAverage(songAcousticness));
   console.log(calcAverage(songDanceability));
   console.log(calcAverage(songEnergy));
   console.log(calcAverage(songExplicit));
   console.log(calcAverage(songLiveness));
-  console.log(((-calcAverage(songLoudness) + 20)) / 100);
+  console.log((-calcAverage(songLoudness) + 20) / 100);
   console.log(calcAverage(songPopularity) / 100);
   console.log(calcAverage(songSpeechiness));
   console.log(calcAverage(songTempo) / 200);
-  //   let subjectindex = songNames.indexOf('The Beatles');
-
-  //console.log(subjectindex);
 
   /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
 
@@ -110,19 +99,21 @@ d3.csv("clean_data.csv", function (importedData) {
   ////////////////////////// Data //////////////////////////////
   //////////////////////////////////////////////////////////////
 
+console.log(songNames[songID]);
+
   var data = [
     [
       //Song
-      { axis: "Valence", value: songValence[3] },
-      { axis: "Acousticness", value: songAcousticness[3] },
-      { axis: "Danceability", value: songDanceability[3] },
-      { axis: "Energy", value: songEnergy[3] },
-      //{ axis: "Explicit", value: songExplicit[3] },
-      { axis: "Liveness", value: songLiveness[3] },
-      //{ axis: "Loudness", value: (songLoudness[3] + 20) / 100},
-      { axis: "Popularity", value: songPopularity[3] / 100 },
-      //{ axis: "Speechiness", value: songSpeechiness[3] },
-      { axis: "Tempo", value: songTempo[3] / 200 },
+      { axis: "Valence", value: songValence[songID] },
+      { axis: "Acousticness", value: songAcousticness[songID] },
+      { axis: "Danceability", value: songDanceability[songID] },
+      { axis: "Energy", value: songEnergy[songID] },
+      { axis: "Explicit", value: songExplicit[songID] },
+      { axis: "Liveness", value: songLiveness[songID] },
+      { axis: "Loudness", value: (-songLoudness[songID] + 20) / 50},
+      { axis: "Popularity", value: songPopularity[songID] / 100 },
+      //{ axis: "Speechiness", value: songSpeechiness[songID] },
+      { axis: "Tempo", value: songTempo[songID] / 200 },
     ],
     [
       //Average
@@ -130,11 +121,11 @@ d3.csv("clean_data.csv", function (importedData) {
       { axis: "Acousticness", value: calcAverage(songAcousticness) },
       { axis: "Danceability", value: calcAverage(songDanceability) },
       { axis: "Energy", value: calcAverage(songEnergy) },
-      //{ axis: "Explicit", value: calcAverage(songExplicit) },
+      { axis: "Explicit", value: calcAverage(songExplicit) },
       { axis: "Liveness", value: calcAverage(songLiveness) },
-      //{ axis: "Loudness", value: (calcAverage(songLoudness[6]) + 20) / 100},
+      { axis: "Loudness", value: (-calcAverage(songLoudness) + 20) / 50},
       { axis: "Popularity", value: calcAverage(songPopularity) / 100 },
-      //{ axis: "Speechiness", value: calcAverage(songSpeechiness[6]) },
+      //{ axis: "Speechiness", value: calcAverage(songSpeechiness) },
       { axis: "Tempo", value: calcAverage(songTempo) / 200 },
     ],
   ];
@@ -142,7 +133,7 @@ d3.csv("clean_data.csv", function (importedData) {
   //////////////////// Draw the Chart //////////////////////////
   //////////////////////////////////////////////////////////////
 
-  var color = d3.scale.ordinal().range(["#EDC951", "#CC333F"]);
+  var color = d3.scale.ordinal().range(["#EDC951", "#342ca8"]);
 
   var radarChartOptions = {
     w: width,
@@ -525,11 +516,12 @@ function RadarChart(id, data, options) {
   } //wrap
 } //RadarChart
 
-
 function calcAverage(array) {
-    var i = 0, sum = 0, len = array.length;
-    while (i < len) {
-        sum = sum + +array[i++];
-    }
-    return sum / len;
+  var i = 0,
+    sum = 0,
+    len = array.length;
+  while (i < len) {
+    sum = sum + +array[i++];
+  }
+  return sum / len;
 }
