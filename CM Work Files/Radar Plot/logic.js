@@ -77,19 +77,18 @@ d3.csv("clean_data.csv", function (importedData) {
     songTempo[i] = songTempoAll[subjectindex[i]];
   }
 
-  console.log(songNames);
-  console.log(songTempo);
-
-  console.log(songValence[3]);
-  console.log(songAcousticness[3]);
-  console.log(songDanceability[3]);
-  console.log(songEnergy[3]);
-  console.log(songExplicit[3]);
-  console.log(songLiveness[3]);
-  console.log((-songLoudness[6] + 20) / 100);
-  console.log(songPopularity[3] / 100);
-  console.log(songSpeechiness[3]);
-  console.log(songTempo[3] / 200);
+//   console.log(songNames);
+//   console.log(songTempo);
+  console.log(calcAverage(songValence));
+  console.log(calcAverage(songAcousticness));
+  console.log(calcAverage(songDanceability));
+  console.log(calcAverage(songEnergy));
+  console.log(calcAverage(songExplicit));
+  console.log(calcAverage(songLiveness));
+  console.log(((-calcAverage(songLoudness) + 20)) / 100);
+  console.log(calcAverage(songPopularity) / 100);
+  console.log(calcAverage(songSpeechiness));
+  console.log(calcAverage(songTempo) / 200);
   //   let subjectindex = songNames.indexOf('The Beatles');
 
   //console.log(subjectindex);
@@ -127,16 +126,16 @@ d3.csv("clean_data.csv", function (importedData) {
     ],
     [
       //Average
-      { axis: "Valence", value: songValence[26] },
-      { axis: "Acousticness", value: songAcousticness[26] },
-      { axis: "Danceability", value: songDanceability[26] },
-      { axis: "Energy", value: songEnergy[26] },
-      //{ axis: "Explicit", value: songExplicit[6] },
-      { axis: "Liveness", value: songLiveness[26] },
-      //{ axis: "Loudness", value: (songLoudness[6] + 20) / 100},
-      { axis: "Popularity", value: songPopularity[26] / 100 },
-      //{ axis: "Speechiness", value: songSpeechiness[6] },
-      { axis: "Tempo", value: songTempo[26] / 200 },
+      { axis: "Valence", value: calcAverage(songValence) },
+      { axis: "Acousticness", value: calcAverage(songAcousticness) },
+      { axis: "Danceability", value: calcAverage(songDanceability) },
+      { axis: "Energy", value: calcAverage(songEnergy) },
+      //{ axis: "Explicit", value: calcAverage(songExplicit) },
+      { axis: "Liveness", value: calcAverage(songLiveness) },
+      //{ axis: "Loudness", value: (calcAverage(songLoudness[6]) + 20) / 100},
+      { axis: "Popularity", value: calcAverage(songPopularity) / 100 },
+      //{ axis: "Speechiness", value: calcAverage(songSpeechiness[6]) },
+      { axis: "Tempo", value: calcAverage(songTempo) / 200 },
     ],
   ];
   //////////////////////////////////////////////////////////////
@@ -525,3 +524,12 @@ function RadarChart(id, data, options) {
     });
   } //wrap
 } //RadarChart
+
+
+function calcAverage(array) {
+    var i = 0, sum = 0, len = array.length;
+    while (i < len) {
+        sum = sum + +array[i++];
+    }
+    return sum / len;
+}
