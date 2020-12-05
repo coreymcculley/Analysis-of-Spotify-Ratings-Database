@@ -166,7 +166,7 @@ d3.csv("mus_2010s.csv").then(function(decadeData) {
   // append y axis
   chartGroup.append("text")
     .attr("transform", "rotate(-90)")
-    .attr("y", 0 - margin.left)
+    .attr("y", 50 - margin.left)
     .attr("x", 0 - (chartHeight / 2))
     .attr("dy", "1em")
     .classed("axis-text", true)
