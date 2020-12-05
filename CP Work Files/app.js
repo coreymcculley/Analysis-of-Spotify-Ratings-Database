@@ -4,7 +4,7 @@ var svgHeight = 500;
 var margin = {
   top: 20,
   right: 40,
-  bottom: 80,
+  bottom: 100,
   left: 100
 };
 
@@ -67,15 +67,18 @@ function updateToolTip(chosenXAxis, circlesGroup) {
   if (chosenXAxis === "danceability") {
     var label = "Danceability";
   }
-  else {
+  else if (chosenXAxis === "energy") {
     var label = "Energy";
+  }
+  else {
+    var label = "Tempo";
   }
 
   var toolTip = d3.tip()
     .attr("class", "tooltip")
     .offset([80, -60])
     .html(function(d) {
-      return (`${d.artists}<br>${label} ${d[chosenXAxis]}`);
+      return (`${d.artists}<br>${d.name}<br>Popularity: ${d.popularity}<br>${label}: ${d[chosenXAxis]}`);
     });
 
     circlesGroup.call(toolTip);
@@ -144,14 +147,21 @@ d3.csv("mus_2010s.csv").then(function(decadeData) {
     .attr("y", 20)
     .attr("value", "danceability") // value to grab for event listener
     .classed("active", true)
-    .text("Danceability (0 to 1)");
+    .text("Danceability");
 
   var energyLabel = labelsGroup.append("text")
     .attr("x", 0)
     .attr("y", 40)
     .attr("value", "energy") // value to grab for event listener
     .classed("inactive", true)
-    .text("Energy (0 to 1)");
+    .text("Energy");
+  
+  var tempoLabel = labelsGroup.append("text")
+    .attr("x", 0)
+    .attr("y", 60)
+    .attr("value", "tempo") // value to grab for event listener
+    .classed("inactive", true)
+    .text("Tempo");
 
   // append y axis
   chartGroup.append("text")
@@ -198,12 +208,29 @@ d3.csv("mus_2010s.csv").then(function(decadeData) {
           energyLengthLabel
             .classed("active", false)
             .classed("inactive", true);
+          tempoLengthLabel
+            .classed("active", false)
+            .classed("inactive", true);
+        }
+        else if (chosenXAxis === "energy") {
+          danceabilityLabel
+            .classed("active", false)
+            .classed("inactive", true);
+          energyLengthLabel
+            .classed("active", true)
+            .classed("inactive", false);
+          tempoLengthLabel
+            .classed("active", false)
+            .classed("inactive", true);
         }
         else {
           danceabilityLabel
             .classed("active", false)
             .classed("inactive", true);
           energyLengthLabel
+            .classed("active", false)
+            .classed("inactive", true);
+          tempoLengthLabel
             .classed("active", true)
             .classed("inactive", false);
         }

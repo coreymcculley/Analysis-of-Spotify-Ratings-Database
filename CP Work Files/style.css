@@ -1,5 +1,23 @@
-#hairmetal {
-  border-radius: 8px;
+h1{
+  font-size: 24px;
+  color: black;
+  font-weight: bold;
+  font-family: helvetica;
+  text-align: center;
+}
+
+h2{
+  font-size: 18px;
+  color: black;
+  font-family: helvetica;
+  text-align: left;
+}
+
+h5{
+  font-size: 15px;
+  color: black;
+  font-family: helvetica;
+  text-align: left;
 }
 
 .chart::before {
@@ -20,41 +38,43 @@
 
 .tooltip {
   position: absolute;
-  width: 135px;
-  height: 60px;
+  width: 200px;
+  height: 80px;
   padding: 2px;
   padding-top: 8px;
-  font: 12px sans-serif;
+  font: 12px helvetica;
   color: white;
-  text-align: center;
-  background: #551aaf;
+  text-align: left;
+  background: navy;
   border: 0;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .axis-text {
-  font-family: sans-serif;
+  font-family: helvetica;
   font-weight: bold;
-  fill: #551aaf;
+  fill: navy;
   text-anchor: middle;
 }
 
 .active {
+  font-family: helvetica;
   font-weight: bold;
   fill: #000;
-  fill: #551aaf;
+  fill: navy;
   transition: fill 0.3s ease-out;
   text-anchor: middle;
 }
 
 .inactive {
   font-weight: lighter;
-  fill: #551aaf;
+  font-family: helvetica;
+  fill: navy;
   transition: fill 0.3s ease-out;
   text-anchor: middle;
 }
 
 .inactive:hover {
-  fill: #e75480;
+  fill: orangered;
   cursor: pointer;
 }
