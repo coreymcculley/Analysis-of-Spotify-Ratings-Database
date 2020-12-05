@@ -138,7 +138,7 @@ d3.csv("mus_2010s.csv").then(function(decadeData) {
     .attr("fill", "lightsteelblue")
     .attr("opacity", ".5");
 
-  // Create group for  2 x- axis labels
+  // Create group for  3 x- axis labels
   var labelsGroup = chartGroup.append("g")
     .attr("transform", `translate(${chartWidth / 2}, ${chartHeight + 20})`);
 
@@ -149,14 +149,14 @@ d3.csv("mus_2010s.csv").then(function(decadeData) {
     .classed("active", true)
     .text("Danceability");
 
-  var energyLabel = labelsGroup.append("text")
+  var energyLengthLabel = labelsGroup.append("text")
     .attr("x", 0)
     .attr("y", 40)
     .attr("value", "energy") // value to grab for event listener
     .classed("inactive", true)
     .text("Energy");
   
-  var tempoLabel = labelsGroup.append("text")
+  var tempoLengthLabel = labelsGroup.append("text")
     .attr("x", 0)
     .attr("y", 60)
     .attr("value", "tempo") // value to grab for event listener
@@ -178,6 +178,9 @@ d3.csv("mus_2010s.csv").then(function(decadeData) {
   // x axis labels event listener
   labelsGroup.selectAll("text")
     .on("click", function() {
+
+      console.log(chosenXAxis)
+      
       // get value of selection
       var value = d3.select(this).attr("value");
       if (value !== chosenXAxis) {
@@ -202,7 +205,7 @@ d3.csv("mus_2010s.csv").then(function(decadeData) {
 
         // changes classes to change bold text
         if (chosenXAxis === "danceability") {
-          danceabilityLabel
+          danceabilityLengthLabel
             .classed("active", true)
             .classed("inactive", false);
           energyLengthLabel
@@ -213,7 +216,7 @@ d3.csv("mus_2010s.csv").then(function(decadeData) {
             .classed("inactive", true);
         }
         else if (chosenXAxis === "energy") {
-          danceabilityLabel
+          danceabilityLengthLabel
             .classed("active", false)
             .classed("inactive", true);
           energyLengthLabel
@@ -224,7 +227,7 @@ d3.csv("mus_2010s.csv").then(function(decadeData) {
             .classed("inactive", true);
         }
         else {
-          danceabilityLabel
+          danceabilityLengthLabel
             .classed("active", false)
             .classed("inactive", true);
           energyLengthLabel
