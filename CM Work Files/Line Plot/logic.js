@@ -1,7 +1,7 @@
 d3.csv("clean_data.csv", function (importedData) {
   var artistData = importedData;
 
-  var songID = 5;
+  var songID = 33;
   var bandID = 'AC/DC';
 
   var bandNameAll = [];
@@ -77,16 +77,39 @@ new Chart(document.getElementById("bar-chart"), {
     datasets: [
       {
         label: "Value",
-        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+        backgroundColor: ["red", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
         data: yValues
       }
     ]
   },
   options: {
+    scales: {
+      xAxes: [{
+          gridLines: {
+              display:false
+          },
+          ticks:{
+            fontColor : "#000",
+            fontSize : 10
+          },
+      }],
+      yAxes: [{
+          gridLines: {
+              display:true,
+              color: "#e6e6e6"
+          },
+        ticks:{
+          fontColor : "#000",
+          fontSize : 10
+        },   
+      }]
+    },
     legend: { display: false },
     title: {
       display: true,
-      text: 'Selected Songs Spotify Data'
+      text: 'Selected Songs Spotify Data',
+      fontColor : "#000",
+      fontSize : 14
     },
     animation: {
           duration: 2000,
@@ -103,3 +126,4 @@ new Chart(document.getElementById("bar-chart"), {
 });
 
 });
+
