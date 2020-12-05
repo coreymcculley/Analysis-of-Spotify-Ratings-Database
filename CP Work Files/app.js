@@ -14,7 +14,7 @@ var chartHeight = svgHeight - margin.top - margin.bottom;
 // Create an SVG wrapper, append an SVG group that will hold our chart,
 // and shift the latter by left and top margins.
 var svg = d3
-  .select(".schart")
+  .select("#schart")
   .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
@@ -92,7 +92,7 @@ function updateToolTip(chosenXAxis, circlesGroup) {
 }
 
 // Retrieve data from the CSV file and execute everything below
-d3.csv("df_2010s.csv").then(function(decadeData) {
+d3.csv("mus_2010s.csv").then(function(decadeData) {
 
   // parse data
   decadeData.forEach(function(data) {
@@ -212,3 +212,35 @@ d3.csv("df_2010s.csv").then(function(decadeData) {
 }).catch(function(error) {
   console.log(error);
 });
+
+// // function to initially populate the page with the first decade
+// function initialDecade() {
+
+//   // Get a reference to the decade dropdown
+//   var dropdown = d3.select("#selDataset");
+
+//   // Populate the decade dropdown
+//   d3.csv("clean_data.csv").then((data) => {
+
+//     var decade = data.decade;
+
+//     decade.forEach((dec) => {
+//         dropdown
+//         .append("option")
+//         .text(dec)
+//         .property("value", dec);
+//       });
+
+//     var initial = decade[0];
+//     console.log(initial);
+//     xScale(initial);
+//   });
+// };
+
+// // function to handle a change in the decade dropdown 
+// function optionChanged(changeDecade) {
+//   xScale(changeDecade);
+// };
+
+// // Initial load of the charts and metadata panel based on 1st subject ID
+// initialDecade();

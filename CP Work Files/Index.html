@@ -4,9 +4,31 @@
 		<title>Decade Scatter Plot</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
+
 	<body>
-		<div class="schart">
+		<div class="container">
+			<div class="row">
+			  <div class="col-md-12 jumbotron text-center">
+				<h1>Popularity by Decade</h1>
+				<p>Most Popular Artists by Decade</p>
+			  </div>
+			</div>
+			<div class="row">
+			  <div class="col-md-2">
+				<div class="well">
+				  <h5>Decade:</h5>
+				  <select id="selDataset" onchange="optionChanged(this.value)"></select>
+				</div>
+			</div>
+			</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div id="schart">
+				</div>
+			</div>
 		</div>
+
 		<script src="https://d3js.org/d3.v5.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
 		<script type="text/javascript" src="app.js"></script>
