@@ -5,96 +5,87 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Spotify Datify</title>
+  <title>Spotify Datify: Reference</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="background">
 
   <div class="container">
     <div class="row">
       <div class="col-md-12 jumbotron text-center bgimage">
-        <h1>Spotify Top Song Data 1928-2020</h1>
+        <h1>Spotify Top Song Data</h1>
+        <h3>1928-2020</h3>
         <p>Use the interactive charts below to explore the dataset</p>
       </div>
     </div>
       <div class="row text-center">
         <div class="col-4">
-          <button type="button" class="btn btn-primary btn-lg">Home Page</button>
-          <button type="button" class="btn btn-primary btn-lg">Popularity by Decade</button>
-          <button type="button" class="btn btn-primary btn-lg">Artist Information</button>
-          <button type="button" class="btn btn-primary btn-lg">Characteristic Details</button>
+          <a type="button" class="btn btn-primary btn-lg btn-style" href="index.html">Home Page</a>
+          <a type="button" class="btn btn-primary btn-lg btn-style" href="decade.html">Popularity by Decade</a>
+          <a type="button" class="btn btn-primary btn-lg btn-style" href="artist_info.html">Artist Information</a>
+          <a type="button" class="btn btn-primary btn-lg btn-style" href="spotify_definitions.html">Characteristic Details</a>
         </div> 
     </div>
   </div>
 
-  <h1 class="col-md-12">Spotify Characteristic Definitions</h1>
+  <h1 class="col-md-12 text-header">Spotify Characteristic Definitions</h1>
   
   <div class="col-md-12">   
-    <dl class="row">
-      <dt class="col-sm-3">Valence</dt>
-      <dd class="col-sm-9">A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).</dd>
-      <dt class="col-sm-3">Acousticness</dt>
-      <dd class="col-sm-9">A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic.</dd>
-      <dt class="col-sm-3">Danceability</dt>
-      <dd class="col-sm-9">Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.</dd>
-      <dt class="col-sm-3">Energy</dt>
-      <dd class="col-sm-9">Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.</dd>
-      <dt class="col-sm-3">Explicit</dt>
-      <dd class="col-sm-9">Explicit is a measure from 0.0 to 1.0 and represents a explicit nature of the lyrics of the song. A value of 1.0 is very explicit and 0.0 is not explicit..</dd>
-      <dt class="col-sm-3">Liveness</dt>
-      <dd class="col-sm-9">Detects the presence of an audience in the recording. Higher liveness values represent an increased probability that the track was performed live. A value above 0.8 provides strong likelihood that the track is live.</dd>
-      <dt class="col-sm-3">Loudness</dt>
-      <dd class="col-sm-9">The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks. Loudness is the quality of a sound that is the primary psychological correlate of physical strength (amplitude).</dd>
-      <dt class="col-sm-3">Popularity</dt>
-      <dd class="col-sm-9">Popularity is a measure from 0 to 100 and represents that song's popularity rank in the year of its release.</dd>
-      <dt class="col-sm-3">Tempo</dt>
-      <dd class="col-sm-9">The normalized overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration.</dd>
+    <dl class="row text-margin">
+      <dt class="col-sm-3 text-def">Valence</dt>
+      <dd class="col-sm-9 text-def">A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).</dd>
+      <hr>
+      <dt class="col-sm-3 text-def">Acousticness</dt>
+      <dd class="col-sm-9 text-def">A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic.</dd>
+      <hr>
+      <dt class="col-sm-3 text-def">Danceability</dt>
+      <dd class="col-sm-9 text-def">Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.</dd>
+      <hr>     
+      <dt class="col-sm-3 text-def">Energy</dt>
+      <dd class="col-sm-9 text-def">Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.</dd>
+      <hr>   
+      <dt class="col-sm-3 text-def">Explicit</dt>
+      <dd class="col-sm-9 text-def">Explicit is a measure from 0.0 to 1.0 and represents a explicit nature of the lyrics of the song. A value of 1.0 is very explicit and 0.0 is not explicit..</dd>
+      <hr>
+      <dt class="col-sm-3 text-def">Liveness</dt>
+      <dd class="col-sm-9 text-def">Detects the presence of an audience in the recording. Higher liveness values represent an increased probability that the track was performed live. A value above 0.8 provides strong likelihood that the track is live.</dd>
+      <hr>
+      <dt class="col-sm-3 text-def">Loudness</dt>
+      <dd class="col-sm-9 text-def">The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks. Loudness is the quality of a sound that is the primary psychological correlate of physical strength (amplitude).</dd>
+      <hr>
+      <dt class="col-sm-3 text-def">Popularity</dt>
+      <dd class="col-sm-9 text-def">Popularity is a measure from 0 to 100 and represents that song's popularity rank in the year of its release.</dd>
+      <hr>
+      <dt class="col-sm-3 text-def">Tempo</dt>
+      <dd class="col-sm-9 text-def">The normalized overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration.</dd>
   </dl>
   </div>
     
 
-
-
-
-
-
-
-    <!-- <div class="row">
-      <div class="col-md-2">
-        
-        <div class="well">
-          <h5>Test Subject ID No.:</h5>
-          <select id="selDataset" onchange="optionChanged(this.value)"></select>
-        </div>
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Demographic Info</h3>
-          </div>
-          <div id="sample-metadata" class="panel-body"></div>
-        </div>
-      </div>
-      <div class="col-md-5">
-        <div id="bar"></div>
-      </div>
-      <div class="col-md-5">
-        <div id="gauge"></div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div id="bubble"></div>
-      </div>
-    </div>
-  </div> -->
-
+  <script src="https://kit.fontawesome.com/951076ae2f.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <script src="./static/js/app.js"></script>
+  <!-- <script src="./static/js/app.js"></script>
   <script src="./static/js/bonus.js"></script>
-  <script src="samples.json"></script>
+  <script src="samples.json"></script> -->
   
 </body>
+<!-- Footer -->
+<footer class="page-footer font-small pt-4">
 
+  <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3" style="color:#1DB954;" >
+    <i class="fab fa-spotify"></i>
+    <a  style="color:#1DB954;" href="https://spotify.com">Spotify</a>
+    © 2020 Copyright:
+    <a style="color:#1DB954;" href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
 </html>

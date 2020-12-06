@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="background">
 
   <div class="container">
     <div class="row">
@@ -22,54 +22,42 @@
     </div>
       <div class="row text-center">
         <div class="col-4">
-          <button type="button" class="btn btn-primary btn-lg">Home Page</button>
-          <button type="button" class="btn btn-primary btn-lg">Popularity by Decade</button>
-          <button type="button" class="btn btn-primary btn-lg">Artist Information</button>
-          <button type="button" class="btn btn-primary btn-lg">Characteristic Details</button>
+          <a type="button" class="btn btn-primary btn-lg btn-style" href="index.html">Home Page</a>
+          <a type="button" class="btn btn-primary btn-lg btn-style" href="decade.html">Popularity by Decade</a>
+          <a type="button" class="btn btn-primary btn-lg btn-style" href="artist_info.html">Artist Information</a>
+          <a type="button" class="btn btn-primary btn-lg btn-style" href="spotify_definitions.html">Characteristic Details</a>
         </div> 
     </div>
   </div>
 
-  <h1 class="col-md-12">Most Popular Artists (1920 – Today)</h1>
+  <h1 class="col-md-12 text-header">Most Popular Artists (1920 – Today)</h1>
   <hr>
-        <img class="col-md-12" src="top-sellers-chart.jpg" alt="Latitude vs. Temperature" width="800" align="center">
+        <img class="col-md-12" src="top-sellers-chart.jpg"  width="200px" align="center">
   <hr>
-  <h3>Text Placeholder</h3>
+  <h3 class="text-body">Text Placeholder</h3>
 
 
-
-
-    <!-- <div class="row">
-      <div class="col-md-2">
-        
-        <div class="well">
-          <h5>Test Subject ID No.:</h5>
-          <select id="selDataset" onchange="optionChanged(this.value)"></select>
-        </div>
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Demographic Info</h3>
-          </div>
-          <div id="sample-metadata" class="panel-body"></div>
-        </div>
-      </div>
-      <div class="col-md-5">
-        <div id="bar"></div>
-      </div>
-      <div class="col-md-5">
-        <div id="gauge"></div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div id="bubble"></div>
-      </div>
-    </div>
-  </div> -->
-
+  <script src="https://kit.fontawesome.com/951076ae2f.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 </body>
+<!-- Footer -->
+<footer class="page-footer font-small pt-4">
 
+  <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3" style="color:#1DB954;" >
+    <i class="fab fa-spotify"></i>
+    <a  style="color:#1DB954;" href="https://spotify.com">Spotify</a>
+    © 2020 Copyright:
+    <a style="color:#1DB954;" href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 </html>
+

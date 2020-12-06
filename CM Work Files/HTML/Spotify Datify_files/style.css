@@ -1,0 +1,12 @@
+.bgimage {
+  position: relative;
+  height: 350px;
+  padding: 20px;
+  margin: 20px;
+  background: white;
+  background-image: url("spotify-theme-music-bkg-dark.jpg");
+  /* background-attachment: fixed; */
+  background-position: bottom center;
+  background-size: cover;
+  color:white;
+}

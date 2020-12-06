@@ -1,8 +1,8 @@
 d3.csv("clean_data.csv", function (importedData) {
   var artistData = importedData;
 
-  var songID = 20;
-  var bandID = 'Ariana Grande';
+  var songID = 10;
+  var bandID = 'Hank Williams';
 
   var bandNameAll = [];
   var songNamesAll = [];
