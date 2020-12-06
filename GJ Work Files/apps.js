@@ -3,21 +3,19 @@ d3.csv("df_all_data_w_decades.csv")
   .then(function (musicData) {
     var artistcountbydecade = {};
     musicData.forEach((data) => {
-      if (
-        [
-          "['Эрнест Хемингуэй']",
-          "['Эрих Мария Ремарк']",
-          "['Unspecified']",
-        ].includes(data.artists)
-      ) {
+      let artistname = data.artists;
+      artistname = artistname.replaceAll("['", "");
+      artistname = artistname.replaceAll("']", "");
+      if (["Unspecified"].includes(artistname)) {
+        return;
       }
       if (!artistcountbydecade[data.decade]) {
         artistcountbydecade[data.decade] = {};
       }
-      if (artistcountbydecade[data.decade][data.artists]) {
-        artistcountbydecade[data.decade][data.artists] += 1;
+      if (artistcountbydecade[data.decade][artistname]) {
+        artistcountbydecade[data.decade][artistname] += 1;
       } else {
-        artistcountbydecade[data.decade][data.artists] = 1;
+        artistcountbydecade[data.decade][artistname] = 1;
       }
     });
 
@@ -53,8 +51,8 @@ d3.csv("df_all_data_w_decades.csv")
     var chartMargin = {
       top: 30,
       right: 30,
-      bottom: 30,
-      left: 350,
+      bottom: 50,
+      left: 150,
     };
 
     // Define dimensions of the chart area
@@ -68,6 +66,7 @@ d3.csv("df_all_data_w_decades.csv")
       .select("body")
       .append("svg")
       .attr("height", svgHeight)
+      .attr("class", "chartsvg")
       .attr("width", svgWidth);
 
     // Append a group to the SVG area and shift ('translate') it to the right and to the bottom
@@ -114,7 +113,10 @@ d3.csv("df_all_data_w_decades.csv")
             }
           }
         });
-        return `${d}<br>${minartistdecade} - ${maxartistdecade + 10}`;
+        let artistname = d;
+        artistname = artistname.replaceAll("['", "");
+        artistname = artistname.replaceAll("']", "");
+        return `${artistname}<br>${minartistdecade} - ${maxartistdecade + 10}`;
       });
 
     // Create tooltip in the chart
@@ -128,6 +130,24 @@ d3.csv("df_all_data_w_decades.csv")
       .append("g")
       .attr("transform", `translate(0, ${chartHeight})`)
       .call(bottomAxis);
+
+    svg
+      .append("text")
+      .text("Decade")
+      .attr("x", chartWidth / 2 + chartMargin.left)
+      .attr("y", svgHeight - 10)
+      .attr("font-weight", "bold");
+
+    svg
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 10)
+      .attr("x", (-1 * chartHeight) / 2)
+      // .attr("dy", "1em")
+      .attr("class", "axisText")
+      .style("text-anchor", "middle")
+      .text("Artist")
+      .attr("font-weight", "bold");
 
     // Create one SVG rectangle per piece of musicData
     // Use the linear and band scales to position each rectangle within the chart

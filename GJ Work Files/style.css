@@ -16,3 +16,10 @@ body {
   border: 1px solid black;
   padding: 16px;
 }
+.title {
+text-align: center;
+}
+.chartsvg {
+  display: block;
+  margin: auto;
+}
