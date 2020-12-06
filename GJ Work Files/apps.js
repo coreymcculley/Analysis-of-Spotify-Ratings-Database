@@ -4,7 +4,11 @@ d3.csv("df_all_data_w_decades.csv")
     var artistcountbydecade = {};
     musicData.forEach((data) => {
       if (
-        ["['Эрнест Хемингуэй']", "['Эрих Мария Ремарк']"].includes(data.artists)
+        [
+          "['Эрнест Хемингуэй']",
+          "['Эрих Мария Ремарк']",
+          "['Unspecified']",
+        ].includes(data.artists)
       ) {
       }
       if (!artistcountbydecade[data.decade]) {
@@ -33,6 +37,9 @@ d3.csv("df_all_data_w_decades.csv")
       toptenartistsbydecade[key] = toptenartists.slice(0, 5);
     });
 
+    delete toptenartistsbydecade[1920];
+    delete toptenartistsbydecade[1930];
+    delete toptenartistsbydecade[1940];
     delete toptenartistsbydecade[2020];
 
     console.log(artistcountbydecade);
@@ -69,7 +76,7 @@ d3.csv("df_all_data_w_decades.csv")
       .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
 
     // Configure a band scale for the horizontal axis with a padding of 0.1 (10%)
-    var xscale = d3.scaleLinear().domain([1920, 2020]).range([0, chartWidth]);
+    var xscale = d3.scaleLinear().domain([1950, 2020]).range([0, chartWidth]);
     var allartists = [];
     Object.values(toptenartistsbydecade).forEach((topartists) => {
       allartists = allartists.concat(topartists);
@@ -84,6 +91,34 @@ d3.csv("df_all_data_w_decades.csv")
     // These will be used to create the chart's axes
     var bottomAxis = d3.axisBottom(xscale);
     var leftAxis = d3.axisLeft(yscale).ticks(10);
+
+    // Initialize tooltip
+    var toolTip = d3
+      .tip()
+      .attr("class", "tooltip")
+      .offset([80, -60])
+      .html(function (d) {
+        var maxartistdecade = 0;
+        var minartistdecade = 2030;
+        Object.keys(toptenartistsbydecade).forEach((decade) => {
+          if (
+            toptenartistsbydecade[decade].find((artists) => {
+              return artists == d;
+            })
+          ) {
+            if (Number(decade) > maxartistdecade) {
+              maxartistdecade = Number(decade);
+            }
+            if (Number(decade) < minartistdecade) {
+              minartistdecade = Number(decade);
+            }
+          }
+        });
+        return `${d}<br>${minartistdecade} - ${maxartistdecade + 10}`;
+      });
+
+    // Create tooltip in the chart
+    chartGroup.call(toolTip);
 
     // Append two SVG group elements to the chartGroup area,
     // and create the bottom and left axes inside of them
@@ -140,7 +175,15 @@ d3.csv("df_all_data_w_decades.csv")
           xscale(Number(maxartistdecade) + 10) - xscale(Number(minartistdecade))
         );
       })
-      .attr("height", 20);
+      .attr("height", 20)
+
+      .on("mouseover", function (data) {
+        toolTip.show(data, this);
+      })
+      // onmouseout event
+      .on("mouseout", function (data, index) {
+        toolTip.hide(data);
+      });
   })
   .catch(function (error) {
     console.log(error);
