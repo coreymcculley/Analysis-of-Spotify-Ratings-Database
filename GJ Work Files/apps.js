@@ -148,6 +148,7 @@ d3.csv("df_all_data_w_decades.csv")
       .style("text-anchor", "middle")
       .text("Artist")
       .attr("font-weight", "bold");
+    // .attr("font-size", 20);
 
     // Create one SVG rectangle per piece of musicData
     // Use the linear and band scales to position each rectangle within the chart
