@@ -1,11 +1,13 @@
 d3.csv("./clean_data.csv", function (importedData) {
-  var songID = 10;
-  var bandID = "Hank Williams";
-  
   artistData = [];
-  var artistData = importedData//.filter(function(d){ return  (d.artists == bandID)});
+  var artistData = importedData;
   console.log(artistData);
-  
+  var songID = 10;
+  var bandID = "The Beatles";
+
+  // var selectedSong = artistData.filter(function (d){ d.artists == bandID && d.subjectindex == songID});
+  // console.log(selectedSong);
+
   var bandNameAll = [];
   var songNamesAll = [];
   var songValenceAll = [];
@@ -105,6 +107,19 @@ d3.csv("./clean_data.csv", function (importedData) {
 
   var data = [
     [
+      //Song
+      { axis: "Valence", value: songValence[songID] },
+      { axis: "Acousticness", value: songAcousticness[songID] },
+      { axis: "Danceability", value: songDanceability[songID] },
+      { axis: "Energy", value: songEnergy[songID] },
+      { axis: "Explicit", value: songExplicit[songID] },
+      { axis: "Liveness", value: songLiveness[songID] },
+      { axis: "Loudness", value: (-songLoudness[songID] + 20) / 50 },
+      { axis: "Popularity", value: songPopularity[songID] / 100 },
+      //{ axis: "Speechiness", value: songSpeechiness[songID] },
+      { axis: "Tempo", value: songTempo[songID] / 200 },
+    ],
+    [
       //Average
       { axis: "Valence", value: calcAverage(songValence) },
       { axis: "Acousticness", value: calcAverage(songAcousticness) },
@@ -117,19 +132,6 @@ d3.csv("./clean_data.csv", function (importedData) {
       //{ axis: "Speechiness", value: calcAverage(songSpeechiness) },
       { axis: "Tempo", value: calcAverage(songTempo) / 200 },
     ],
-    [
-      //Song
-      { axis: "Valence", value: songValence[songID] },
-      { axis: "Acousticness", value: songAcousticness[songID] },
-      { axis: "Danceability", value: songDanceability[songID] },
-      { axis: "Energy", value: songEnergy[songID] },
-      { axis: "Explicit", value: songExplicit[songID] },
-      { axis: "Liveness", value: songLiveness[songID] },
-      { axis: "Loudness", value: (-songLoudness[songID] + 20) / 50 },
-      { axis: "Popularity", value: songPopularity[songID] / 100 },
-      //{ axis: "Speechiness", value: songSpeechiness[songID] },
-      { axis: "Tempo", value: songTempo[songID] / 200 },
-    ]
   ];
   //////////////////////////////////////////////////////////////
   //////////////////// Draw the Chart //////////////////////////

@@ -1,12 +1,30 @@
 function init() {
-  
   d3.csv("./clean_data.csv", function (importedData) {
-    artistData=[];
-    var artistData = importedData;
-    console.log(importedData);
     var songID = 10;
-    var bandID = 'Hank Williams';
-  
+    var bandID = "The Beatles";
+
+    artistData = [];
+    artistDataDropdown=[];
+    songDataDropdown=[];
+    var artistData = +importedData;
+    console.log(artistData);
+
+
+    //BuildDropdown
+    var artistDataDropdown = importedData.filter(function(d){ return  (d.artists == bandID)});
+    var songDataDropdown =artistDataDropdown.name;
+    console.log(songDataDropdown);
+    // Select the dropdown and build the Subject ID dropdown
+    const subjectselect = d3.select("#selDataset");
+
+    songDataDropdown.forEach(namevalue =>{
+        var option = subjectselect.append("option");
+        option.text(namevalue);
+        option.attr("value",namevalue);
+    });
+
+    
+
     var bandNameAll = [];
     var songNamesAll = [];
     var songValenceAll = [];
@@ -20,7 +38,7 @@ function init() {
     var songSpeechinessAll = [];
     var songTempoAll = [];
     var subjectindex = [];
-  
+
     for (var i = 0; i < artistData.length; i++) {
       bandNameAll[i] = artistData[i].artists;
       songNamesAll[i] = artistData[i].name;
@@ -35,17 +53,15 @@ function init() {
       songSpeechinessAll[i] = artistData[i].speechiness;
       songTempoAll[i] = artistData[i].tempo;
     }
-  
+
     // console.log(bandName.length);
-  
-  
-  
+
     for (var i = 0; i < artistData.length; i++) {
       if (bandNameAll[i] == bandID) {
         subjectindex.push(i);
       }
     }
-  
+
     var bandName = [];
     var songNames = [];
     var songValence = [];
@@ -58,7 +74,7 @@ function init() {
     var songPopularity = [];
     var songSpeechiness = [];
     var songTempo = [];
-  
+
     for (var i = 0; i < subjectindex.length; i++) {
       bandName[i] = bandNameAll[subjectindex[i]];
       songNames[i] = songNamesAll[subjectindex[i]];
@@ -73,7 +89,7 @@ function init() {
       songSpeechiness[i] = songSpeechinessAll[subjectindex[i]];
       songTempo[i] = songTempoAll[subjectindex[i]];
     }
-  
+
     // console.log(calcAverage(songValence));
     // console.log(calcAverage(songAcousticness));
     // console.log(calcAverage(songDanceability));
@@ -84,40 +100,29 @@ function init() {
     // console.log(calcAverage(songPopularity) / 100);
     // console.log(calcAverage(songSpeechiness));
     // console.log(calcAverage(songTempo) / 200);
-  
+
     /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
-  
+
     //////////////////////////////////////////////////////////////
     //////////////////////// Set-Up //////////////////////////////
     //////////////////////////////////////////////////////////////
-  
+
     var margin = { top: 100, right: 100, bottom: 100, left: 100 },
-      width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+      legendPosition = { x: 25, y: 25 },
+      width =
+        Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
       height = Math.min(
         width,
         window.innerHeight - margin.top - margin.bottom - 20
       );
-  
+
     //////////////////////////////////////////////////////////////
     ////////////////////////// Data //////////////////////////////
     //////////////////////////////////////////////////////////////
-  
-  console.log(songNames[songID]);
-  
+
+    console.log(songNames[songID]);
+
     var data = [
-      [
-        //Song
-        { axis: "Valence", value: songValence[songID] },
-        { axis: "Acousticness", value: songAcousticness[songID] },
-        { axis: "Danceability", value: songDanceability[songID] },
-        { axis: "Energy", value: songEnergy[songID] },
-        { axis: "Explicit", value: songExplicit[songID] },
-        { axis: "Liveness", value: songLiveness[songID] },
-        { axis: "Loudness", value: (-songLoudness[songID] + 20) / 50},
-        { axis: "Popularity", value: songPopularity[songID] / 100 },
-        //{ axis: "Speechiness", value: songSpeechiness[songID] },
-        { axis: "Tempo", value: songTempo[songID] / 200 },
-      ],
       [
         //Average
         { axis: "Valence", value: calcAverage(songValence) },
@@ -126,47 +131,159 @@ function init() {
         { axis: "Energy", value: calcAverage(songEnergy) },
         { axis: "Explicit", value: calcAverage(songExplicit) },
         { axis: "Liveness", value: calcAverage(songLiveness) },
-        { axis: "Loudness", value: (-calcAverage(songLoudness) + 20) / 50},
+        { axis: "Loudness", value: (-calcAverage(songLoudness) + 20) / 50 },
         { axis: "Popularity", value: calcAverage(songPopularity) / 100 },
         //{ axis: "Speechiness", value: calcAverage(songSpeechiness) },
         { axis: "Tempo", value: calcAverage(songTempo) / 200 },
+      ],
+      [
+        //Song
+        { axis: "Valence", value: songValence[songID] },
+        { axis: "Acousticness", value: songAcousticness[songID] },
+        { axis: "Danceability", value: songDanceability[songID] },
+        { axis: "Energy", value: songEnergy[songID] },
+        { axis: "Explicit", value: songExplicit[songID] },
+        { axis: "Liveness", value: songLiveness[songID] },
+        { axis: "Loudness", value: (-songLoudness[songID] + 20) / 50 },
+        { axis: "Popularity", value: songPopularity[songID] / 100 },
+        //{ axis: "Speechiness", value: songSpeechiness[songID] },
+        { axis: "Tempo", value: songTempo[songID] / 200 },
       ],
     ];
     //////////////////////////////////////////////////////////////
     //////////////////// Draw the Chart //////////////////////////
     //////////////////////////////////////////////////////////////
-  
+
     var color = d3.scale.ordinal().range(["#EDC951", "#342ca8"]);
-  
+
     var radarChartOptions = {
       w: width,
       h: height,
       margin: margin,
+      legendPosition: legendPosition,
       maxValue: 0.5,
       levels: 5,
       roundStrokes: true,
       color: color,
     };
     //Call function to draw the Radar chart
-    RadarChart(".top10songs", data, radarChartOptions);
-  });  
+    RadarChart(".radarChart", data, radarChartOptions);
+  });
 }
-
 //THIS WILL REDRAW THE GRAPH WHEN THE DROPDOWN CHANGES
 //d3.selectAll("body").on("change", updatePlotly);
 
+//Get input from the text box, filter for the matching dates and output table of results. 
+//Also include an error popup if searched data does not match the anything in the provided data.
+var button = d3.select("#artist-button");
+//filter data based on user input
+button.on("click", function() {
+
+    filteredData = [];
+    d3.event.preventDefault();
+    // Select the input element and get the raw HTML node
+    var inputElement = d3.select("#artist-search");
+    // Get the value property of the input element
+    var inputValue = inputElement.property("value");
+    console.log(inputValue);
+
+    var filteredData = tableData.filter(ufoData => ufoData.datetime === inputValue);
+    //console.log(filteredData);
+    if (Object.keys(filteredData).length === 0){
+        errorPopup();
+    }
+    else {
+        clearTable();
+        renderTable(filteredData);
+    }
+});
+
+
+//Function to redraw Radar Plot based on selections
+function updateRadar() {
+  // Select the dropdown menu
+  var subjectselect = d3.select("#selDataset");
+
+  // Assign the value of the dropdown menu option to a variable
+  var dataset = subjectselect.node().value;
+  // Find the index of the subject in the justtestsubjects array
+  //index of finds the provided input in the array and output the matching index
+  let subjectindex = justtestsubjects.indexOf(dataset);
+
+  var margin = { top: 100, right: 100, bottom: 100, left: 100 },
+    legendPosition = { x: 25, y: 25 },
+    width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+    height = Math.min(
+      width,
+      window.innerHeight - margin.top - margin.bottom - 20
+    );
+
+  //////////////////////////////////////////////////////////////
+  ////////////////////////// Data //////////////////////////////
+  //////////////////////////////////////////////////////////////
+
+  console.log(songNames[songID]);
+
+  var data = [
+    [
+      //Average
+      { axis: "Valence", value: calcAverage(songValence) },
+      { axis: "Acousticness", value: calcAverage(songAcousticness) },
+      { axis: "Danceability", value: calcAverage(songDanceability) },
+      { axis: "Energy", value: calcAverage(songEnergy) },
+      { axis: "Explicit", value: calcAverage(songExplicit) },
+      { axis: "Liveness", value: calcAverage(songLiveness) },
+      { axis: "Loudness", value: (-calcAverage(songLoudness) + 20) / 50 },
+      { axis: "Popularity", value: calcAverage(songPopularity) / 100 },
+      //{ axis: "Speechiness", value: calcAverage(songSpeechiness) },
+      { axis: "Tempo", value: calcAverage(songTempo) / 200 },
+    ],
+    [
+      //Song
+      { axis: "Valence", value: songValence[songID] },
+      { axis: "Acousticness", value: songAcousticness[songID] },
+      { axis: "Danceability", value: songDanceability[songID] },
+      { axis: "Energy", value: songEnergy[songID] },
+      { axis: "Explicit", value: songExplicit[songID] },
+      { axis: "Liveness", value: songLiveness[songID] },
+      { axis: "Loudness", value: (-songLoudness[songID] + 20) / 50 },
+      { axis: "Popularity", value: songPopularity[songID] / 100 },
+      //{ axis: "Speechiness", value: songSpeechiness[songID] },
+      { axis: "Tempo", value: songTempo[songID] / 200 },
+    ],
+  ];
+  //////////////////////////////////////////////////////////////
+  //////////////////// Draw the Chart //////////////////////////
+  //////////////////////////////////////////////////////////////
+
+  var color = d3.scale.ordinal().range(["#EDC951", "#342ca8"]);
+
+  var radarChartOptions = {
+    w: width,
+    h: height,
+    margin: margin,
+    legendPosition: legendPosition,
+    maxValue: 0.5,
+    levels: 5,
+    roundStrokes: true,
+    color: color,
+  };
+  //Call function to draw the Radar chart
+  RadarChart(".radarChart", data, radarChartOptions);
+}
 
 /////////////////////////////////////////////////////////
-  /////////////// The Radar Chart Function ////////////////
-  /////////////// Written by Nadieh Bremer ////////////////
-  ////////////////// VisualCinnamon.com ///////////////////
-  /////////// Inspired by the code of alangrafu ///////////
-  /////////////////////////////////////////////////////////
+/////////////// The Radar Chart Function ////////////////
+/////////////// Written by Nadieh Bremer ////////////////
+////////////////// VisualCinnamon.com ///////////////////
+/////////// Inspired by the code of alangrafu ///////////
+/////////////////////////////////////////////////////////
 function RadarChart(id, data, options) {
   var cfg = {
     w: 600, //Width of the circle
     h: 600, //Height of the circle
     margin: { top: 20, right: 20, bottom: 20, left: 20 }, //The margins of the SVG
+    legendPosition: { x: 20, y: 20 }, // the position of the legend, from the top-left corner of the svg
     levels: 3, //How many levels or inner circles should there be drawn
     maxValue: 0, //What is the value that the biggest circle will represent
     labelFactor: 1.25, //How much farther than the radius of the outer circle should the labels be placed
@@ -521,6 +638,67 @@ function RadarChart(id, data, options) {
       }
     });
   } //wrap
+
+  // on mouseover for the legend symbol
+  function cellover(d) {
+    //Dim all blobs
+    d3.selectAll(".radarArea")
+      .transition()
+      .duration(200)
+      .style("fill-opacity", 0.1);
+    //Bring back the hovered over blob
+    d3.select("." + data[d][0][areaName].replace(/\s+/g, ""))
+      .transition()
+      .duration(200)
+      .style("fill-opacity", 0.7);
+  }
+
+  // on mouseout for the legend symbol
+  function cellout() {
+    //Bring back all blobs
+    d3.selectAll(".radarArea")
+      .transition()
+      .duration(200)
+      .style("fill-opacity", cfg.opacityArea);
+  }
+
+  /////////////////////////////////////////////////////////
+  /////////////////// Draw the Legend /////////////////////
+  /////////////////////////////////////////////////////////
+
+  svg
+    .append("g")
+    .attr("class", "legendOrdinal")
+    .attr(
+      "transform",
+      "translate(" +
+        cfg["legendPosition"]["x"] +
+        "," +
+        cfg["legendPosition"]["y"] +
+        ")"
+    );
+
+  var legendOrdinal = d3.legend
+    .color()
+    //d3 symbol creates a path-string, for example
+    //"M0,-8.059274488676564L9.306048591020996,
+    //8.059274488676564 -9.306048591020996,8.059274488676564Z"
+    .shape("path", d3.svg.symbol().type("triangle-up").size(150)())
+    .shapePadding(10)
+    .scale(cfg.color)
+    .labels(
+      cfg.color.domain().map(function (d) {
+        return data[d][0][areaName];
+      })
+    )
+    .on("cellover", function (d) {
+      cellover(d);
+    })
+    .on("cellout", function (d) {
+      cellout();
+    });
+
+  svg.select(".legendOrdinal").call(legendOrdinal);
 } //RadarChart
 
 function calcAverage(array) {
