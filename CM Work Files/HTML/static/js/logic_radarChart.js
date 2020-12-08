@@ -1,12 +1,15 @@
 //function init() {
 d3.csv("clean_data.csv", function (importedData) {
   var songID = 0;
-  var bandID = "Led Zeppelin";
+  var song = "Hey Jude";
+  var bandID = "The Beatles";
 
   artistData = [];
   var artistData = importedData; //.filter(function(d){ return  (d.artists == bandID)});
   console.log(artistData);
 
+
+  songUpdate(bandID, song, artistData);
   // var filterData = artistData.filter(function(d){ return  (d.artists == bandID)});
   // console.log(filterData);
 
@@ -119,185 +122,185 @@ d3.csv("clean_data.csv", function (importedData) {
   // Select the dropdown and build the Subject ID dropdown
   buildDropDown(songNames);
 
-  /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
+  // /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
 
-  //////////////////////////////////////////////////////////////
-  //////////////////////// Set-Up //////////////////////////////
-  //////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////
+  // //////////////////////// Set-Up //////////////////////////////
+  // //////////////////////////////////////////////////////////////
 
-  var margin = { top: 90, right: 200, bottom: 70, left: 90 },
-    legendPosition = { x: 0, y: 0 },
-    width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
-    height = Math.min(
-      width,
-      window.innerHeight - margin.top - margin.bottom - 20
-    );
+  // var margin = { top: 90, right: 200, bottom: 70, left: 90 },
+  //   legendPosition = { x: 0, y: 0 },
+  //   width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+  //   height = Math.min(
+  //     width,
+  //     window.innerHeight - margin.top - margin.bottom - 20
+  //   );
 
-  //////////////////////////////////////////////////////////////
-  ////////////////////////// Data //////////////////////////////
-  //////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////
+  // ////////////////////////// Data //////////////////////////////
+  // //////////////////////////////////////////////////////////////
 
-  console.log(songNames[songID]);
+  // console.log(songNames[songID]);
 
-  var data = [
-    [
-      //Average
-      { axis: "Valence", value: calcAverage(songValence) },
-      { axis: "Acousticness", value: calcAverage(songAcousticness) },
-      { axis: "Danceability", value: calcAverage(songDanceability) },
-      { axis: "Energy", value: calcAverage(songEnergy) },
-      { axis: "Explicit", value: calcAverage(songExplicit) },
-      { axis: "Liveness", value: calcAverage(songLiveness) },
-      { axis: "Loudness", value: (-calcAverage(songLoudness) + 20) / 50 },
-      { axis: "Popularity", value: calcAverage(songPopularity) / 100 },
-      //{ axis: "Speechiness", value: calcAverage(songSpeechiness) },
-      { axis: "Tempo", value: calcAverage(songTempo) / 200 },
-    ],
-    [
-      //Song
-      { axis: "Valence", value: songValence[songID] },
-      { axis: "Acousticness", value: songAcousticness[songID] },
-      { axis: "Danceability", value: songDanceability[songID] },
-      { axis: "Energy", value: songEnergy[songID] },
-      { axis: "Explicit", value: songExplicit[songID] },
-      { axis: "Liveness", value: songLiveness[songID] },
-      { axis: "Loudness", value: (-songLoudness[songID] + 20) / 50 },
-      { axis: "Popularity", value: songPopularity[songID] / 100 },
-      //{ axis: "Speechiness", value: songSpeechiness[songID] },
-      { axis: "Tempo", value: songTempo[songID] / 200 },
-    ],
-  ];
-  //////////////////////////////////////////////////////////////
-  //////////////////// Draw the Chart //////////////////////////
-  //////////////////////////////////////////////////////////////
+  // var data = [
+  //   [
+  //     //Average
+  //     { axis: "Valence", value: calcAverage(songValence) },
+  //     { axis: "Acousticness", value: calcAverage(songAcousticness) },
+  //     { axis: "Danceability", value: calcAverage(songDanceability) },
+  //     { axis: "Energy", value: calcAverage(songEnergy) },
+  //     { axis: "Explicit", value: calcAverage(songExplicit) },
+  //     { axis: "Liveness", value: calcAverage(songLiveness) },
+  //     { axis: "Loudness", value: (-calcAverage(songLoudness) + 20) / 50 },
+  //     { axis: "Popularity", value: calcAverage(songPopularity) / 100 },
+  //     //{ axis: "Speechiness", value: calcAverage(songSpeechiness) },
+  //     { axis: "Tempo", value: calcAverage(songTempo) / 200 },
+  //   ],
+  //   [
+  //     //Song
+  //     { axis: "Valence", value: songValence[songID] },
+  //     { axis: "Acousticness", value: songAcousticness[songID] },
+  //     { axis: "Danceability", value: songDanceability[songID] },
+  //     { axis: "Energy", value: songEnergy[songID] },
+  //     { axis: "Explicit", value: songExplicit[songID] },
+  //     { axis: "Liveness", value: songLiveness[songID] },
+  //     { axis: "Loudness", value: (-songLoudness[songID] + 20) / 50 },
+  //     { axis: "Popularity", value: songPopularity[songID] / 100 },
+  //     //{ axis: "Speechiness", value: songSpeechiness[songID] },
+  //     { axis: "Tempo", value: songTempo[songID] / 200 },
+  //   ],
+  // ];
+  // //////////////////////////////////////////////////////////////
+  // //////////////////// Draw the Chart //////////////////////////
+  // //////////////////////////////////////////////////////////////
 
-  console.log(data);
+  // console.log(data);
 
-  var color = d3.scale.ordinal().range(["#342ca8", "#1DB954"]);
+  // var color = d3.scale.ordinal().range(["#342ca8", "#1DB954"]);
 
-  var radarChartOptions = {
-    w: width,
-    h: height,
-    margin: margin,
-    legendPosition: legendPosition,
-    maxValue: 0.5,
-    levels: 5,
-    roundStrokes: true,
-    color: color,
-  };
+  // var radarChartOptions = {
+  //   w: width,
+  //   h: height,
+  //   margin: margin,
+  //   legendPosition: legendPosition,
+  //   maxValue: 0.5,
+  //   levels: 5,
+  //   roundStrokes: true,
+  //   color: color,
+  // };
 
-  //Call function to draw the Radar chart
-  RadarChart(".radarChart", data, radarChartOptions);
+  // //Call function to draw the Radar chart
+  // RadarChart(".radarChart", data, radarChartOptions);
 
-  var xLabels = [
-    "Valence",
-    "Acousticness",
-    "Danceability",
-    "Energy",
-    "Explicit",
-    "Liveness",
-    "Loudness",
-    "Popularity",
-    "Tempo",
-  ];
-  var yValues = [
-    Math.round(100 * songValence[songID]) / 100,
-    Math.round(100 * songAcousticness[songID]) / 100,
-    Math.round(100 * songDanceability[songID]) / 100,
-    Math.round(100 * songEnergy[songID]) / 100,
-    Math.round(100 * songExplicit[songID]) / 100,
-    Math.round(100 * songLiveness[songID]) / 100,
-    Math.round((100 * (-songLoudness[songID] + 20)) / 50) / 100,
-    Math.round((100 * songPopularity[songID]) / 100) / 100,
-    Math.round((100 * songTempo[songID]) / 200) / 100,
-  ];
+  // var xLabels = [
+  //   "Valence",
+  //   "Acousticness",
+  //   "Danceability",
+  //   "Energy",
+  //   "Explicit",
+  //   "Liveness",
+  //   "Loudness",
+  //   "Popularity",
+  //   "Tempo",
+  // ];
+  // var yValues = [
+  //   Math.round(100 * songValence[songID]) / 100,
+  //   Math.round(100 * songAcousticness[songID]) / 100,
+  //   Math.round(100 * songDanceability[songID]) / 100,
+  //   Math.round(100 * songEnergy[songID]) / 100,
+  //   Math.round(100 * songExplicit[songID]) / 100,
+  //   Math.round(100 * songLiveness[songID]) / 100,
+  //   Math.round((100 * (-songLoudness[songID] + 20)) / 50) / 100,
+  //   Math.round((100 * songPopularity[songID]) / 100) / 100,
+  //   Math.round((100 * songTempo[songID]) / 200) / 100,
+  // ];
 
-  //console.log(yValues);
+  // //console.log(yValues);
 
-  new Chart(document.getElementById("bar-chart"), {
-    type: "bar",
-    data: {
-      labels: xLabels,
-      datasets: [
-        {
-          label: "Value",
-          backgroundColor: [
-            "#1DB954",
-            "#1DB954",
-            "#1DB954",
-            "#1DB954",
-            "#1DB954",
-            "#1DB954",
-            "#1DB954",
-            "#1DB954",
-            "#1DB954",
-          ],
-          data: yValues,
-        },
-      ],
-    },
-    options: {
-      tooltips: {
-        callbacks: {
-          title: function (tooltipItem, data) {
-            return data["labels"][tooltipItem[0]["index"]];
-          },
-          label: function (tooltipItem, data) {
-            return data["datasets"][0]["data"][tooltipItem["index"]];
-          },
-        },
-        backgroundColor: "#FFF",
-        titleFontSize: 16,
-        titleFontColor: "#0066ff",
-        bodyFontColor: "#000",
-        bodyFontSize: 14,
-        displayColors: false,
-      },
-      scales: {
-        xAxes: [
-          {
-            gridLines: {
-              display: false,
-            },
-            ticks: {
-              fontColor: "#000",
-              fontSize: 20,
-            },
-          },
-        ],
-        yAxes: [
-          {
-            gridLines: {
-              display: true,
-              color: "#d4d4d4",
-            },
-            ticks: {
-              fontColor: "#000",
-              fontSize: 20,
-            },
-          },
-        ],
-      },
-      legend: { display: false },
-      title: {
-        display: true,
-        text: "",
-        fontColor: "#000",
-        fontSize: 14,
-      },
-      animation: {
-        duration: 2000,
-      },
-      layout: {
-        padding: {
-          left: 20,
-          right: 20,
-          top: 20,
-          bottom: 20,
-        },
-      },
-    },
-  });
+  // new Chart(document.getElementById("bar-chart"), {
+  //   type: "bar",
+  //   data: {
+  //     labels: xLabels,
+  //     datasets: [
+  //       {
+  //         label: "Value",
+  //         backgroundColor: [
+  //           "#1DB954",
+  //           "#1DB954",
+  //           "#1DB954",
+  //           "#1DB954",
+  //           "#1DB954",
+  //           "#1DB954",
+  //           "#1DB954",
+  //           "#1DB954",
+  //           "#1DB954",
+  //         ],
+  //         data: yValues,
+  //       },
+  //     ],
+  //   },
+  //   options: {
+  //     tooltips: {
+  //       callbacks: {
+  //         title: function (tooltipItem, data) {
+  //           return data["labels"][tooltipItem[0]["index"]];
+  //         },
+  //         label: function (tooltipItem, data) {
+  //           return data["datasets"][0]["data"][tooltipItem["index"]];
+  //         },
+  //       },
+  //       backgroundColor: "#FFF",
+  //       titleFontSize: 16,
+  //       titleFontColor: "#0066ff",
+  //       bodyFontColor: "#000",
+  //       bodyFontSize: 14,
+  //       displayColors: false,
+  //     },
+  //     scales: {
+  //       xAxes: [
+  //         {
+  //           gridLines: {
+  //             display: false,
+  //           },
+  //           ticks: {
+  //             fontColor: "#000",
+  //             fontSize: 20,
+  //           },
+  //         },
+  //       ],
+  //       yAxes: [
+  //         {
+  //           gridLines: {
+  //             display: true,
+  //             color: "#d4d4d4",
+  //           },
+  //           ticks: {
+  //             fontColor: "#000",
+  //             fontSize: 20,
+  //           },
+  //         },
+  //       ],
+  //     },
+  //     legend: { display: false },
+  //     title: {
+  //       display: true,
+  //       text: "",
+  //       fontColor: "#000",
+  //       fontSize: 14,
+  //     },
+  //     animation: {
+  //       duration: 2000,
+  //     },
+  //     layout: {
+  //       padding: {
+  //         left: 20,
+  //         right: 20,
+  //         top: 20,
+  //         bottom: 20,
+  //       },
+  //     },
+  //   },
+  // });
 });
 
 //THIS WILL REDRAW THE GRAPH WHEN THE DROPDOWN CHANGES
@@ -705,3 +708,280 @@ function removeOptions(selectElement) {
     selectElement.remove(i);
   }
 }
+
+
+//FUNCTION TO DRAW RADAR AND BAR CHART
+function songUpdate(band, song, data){
+  var bandID = band;
+  var songName = song;
+  var artistData = data;
+
+  var bandNameAll = [];
+  var songNamesAll = [];
+  var songValenceAll = [];
+  var songAcousticnessAll = [];
+  var songDanceabilityAll = [];
+  var songEnergyAll = [];
+  var songExplicitAll = [];
+  var songLivenessAll = [];
+  var songLoudnessAll = [];
+  var songPopularityAll = [];
+  var songSpeechinessAll = [];
+  var songTempoAll = [];
+  var subjectindex = [];
+  var subjectindexAll = [];
+
+  var bandNameAvg = [];
+  var songNamesAvg = [];
+  var songValenceAvg = [];
+  var songAcousticnessAvg = [];
+  var songDanceabilityAvg = [];
+  var songEnergyAvg = [];
+  var songExplicitAvg = [];
+  var songLivenessAvg = [];
+  var songLoudnessAvg = [];
+  var songPopularityAvg = [];
+  var songSpeechinessAvg= [];
+  var songTempoAvg = [];
+  var subjectindex = [];
+  var subjectindexAll = [];
+
+  for (var i = 0; i < artistData.length; i++) {
+    bandNameAll[i] = artistData[i].artists;
+    songNamesAll[i] = artistData[i].name;
+    songValenceAll[i] = artistData[i].energy;
+    songAcousticnessAll[i] = artistData[i].acousticness;
+    songDanceabilityAll[i] = artistData[i].danceability;
+    songEnergyAll[i] = artistData[i].energy;
+    songExplicitAll[i] = artistData[i].explicit;
+    songLivenessAll[i] = artistData[i].liveness;
+    songLoudnessAll[i] = artistData[i].loudness;
+    songPopularityAll[i] = artistData[i].popularity;
+    songSpeechinessAll[i] = artistData[i].speechiness;
+    songTempoAll[i] = artistData[i].tempo;
+  }
+  //console.log(songNamesAll.length);
+
+  for (var i = 0; i < artistData.length; i++) {
+    if (songNamesAll[i] == songName && bandNameAll[i] == bandID) {
+      subjectindex.push(i);
+    }
+  }
+
+  for (var i = 0; i < artistData.length; i++) {
+    if (bandNameAll[i] == bandID) {
+      subjectindexAll.push(i);
+    }
+  }
+
+
+  console.log(subjectindex);
+
+  bandName = bandNameAll[subjectindex];
+  songNames = songNamesAll[subjectindex];
+  songValence = songValenceAll[subjectindex];
+  songAcousticness = songAcousticnessAll[subjectindex];
+  songDanceability = songDanceabilityAll[subjectindex];
+  songEnergy = songEnergyAll[subjectindex];
+  songExplicit = songExplicitAll[subjectindex];
+  songLiveness = songLivenessAll[subjectindex];
+  songLoudness = songLoudnessAll[subjectindex];
+  songPopularity = songPopularityAll[subjectindex];
+  songSpeechiness = songSpeechinessAll[subjectindex];
+  songTempo = songTempoAll[subjectindex];
+
+  for (var i = 0; i < subjectindex.length; i++) {
+    bandNameAvg[i] = bandNameAll[subjectindexAll[i]];
+    songNamesAvg[i] = songNamesAll[subjectindexAll[i]];
+    songValenceAvg[i] = songValenceAll[subjectindexAll[i]];
+    songAcousticnessAvg[i] = songAcousticnessAll[subjectindexAll[i]];
+    songDanceabilityAvg[i] = songDanceabilityAll[subjectindexAll[i]];
+    songEnergyAvg[i] = songEnergyAll[subjectindexAll[i]];
+    songExplicitAvg[i] = songExplicitAll[subjectindexAll[i]];
+    songLivenessAvg[i] = songLivenessAll[subjectindexAll[i]];
+    songLoudnessAvg[i] = songLoudnessAll[subjectindexAll[i]];
+    songPopularityAvg[i] = songPopularityAll[subjectindexAll[i]];
+    songSpeechinessAvg[i] = songSpeechinessAll[subjectindexAll[i]];
+    songTempoAvg[i] = songTempoAll[subjectindexAll[i]];
+  }
+  console.log(songNamesAvg);
+    //////////////////////////////////////////////////////////////
+  //////////////////////// Set-Up //////////////////////////////
+  //////////////////////////////////////////////////////////////
+
+  var margin = { top: 90, right: 200, bottom: 70, left: 90 },
+    legendPosition = { x: 0, y: 0 },
+    width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+    height = Math.min(
+      width,
+      window.innerHeight - margin.top - margin.bottom - 20
+    );
+
+  //////////////////////////////////////////////////////////////
+  ////////////////////////// Data //////////////////////////////
+  //////////////////////////////////////////////////////////////
+
+  console.log(songNames);
+
+  var data = [
+    [
+      //Average
+      { axis: "Valence", value: calcAverage(songValenceAvg) },
+      { axis: "Acousticness", value: calcAverage(songAcousticnessAvg) },
+      { axis: "Danceability", value: calcAverage(songDanceabilityAvg) },
+      { axis: "Energy", value: calcAverage(songEnergyAvg) },
+      { axis: "Explicit", value: calcAverage(songExplicitAvg) },
+      { axis: "Liveness", value: calcAverage(songLivenessAvg) },
+      { axis: "Loudness", value: (-calcAverage(songLoudnessAvg) + 20) / 50 },
+      { axis: "Popularity", value: calcAverage(songPopularityAvg) / 100 },
+      //{ axis: "Speechiness", value: calcAverage(songSpeechinessAvg) },
+      { axis: "Tempo", value: calcAverage(songTempoAvg) / 200 },
+    ],
+    [
+      //Song
+      { axis: "Valence", value: songValence },
+      { axis: "Acousticness", value: songAcousticness },
+      { axis: "Danceability", value: songDanceability },
+      { axis: "Energy", value: songEnergy },
+      { axis: "Explicit", value: songExplicit },
+      { axis: "Liveness", value: songLiveness },
+      { axis: "Loudness", value: (-songLoudness + 20) / 50 },
+      { axis: "Popularity", value: songPopularity / 100 },
+      //{ axis: "Speechiness", value: songSpeechiness },
+      { axis: "Tempo", value: songTempo/ 200 },
+    ],
+  ];
+  //////////////////////////////////////////////////////////////
+  //////////////////// Draw the Chart //////////////////////////
+  //////////////////////////////////////////////////////////////
+
+  console.log(data);
+
+  var color = d3.scale.ordinal().range(["#342ca8", "#1DB954"]);
+
+  var radarChartOptions = {
+    w: width,
+    h: height,
+    margin: margin,
+    legendPosition: legendPosition,
+    maxValue: 0.5,
+    levels: 5,
+    roundStrokes: true,
+    color: color,
+  };
+
+  //Call function to draw the Radar chart
+  RadarChart(".radarChart", data, radarChartOptions);
+
+  var xLabels = [
+    "Valence",
+    "Acousticness",
+    "Danceability",
+    "Energy",
+    "Explicit",
+    "Liveness",
+    "Loudness",
+    "Popularity",
+    "Tempo",
+  ];
+  var yValues = [
+    Math.round(100 * songValence) / 100,
+    Math.round(100 * songAcousticness) / 100,
+    Math.round(100 * songDanceability) / 100,
+    Math.round(100 * songEnergy) / 100,
+    Math.round(100 * songExplicit) / 100,
+    Math.round(100 * songLiveness) / 100,
+    Math.round((100 * (-songLoudness + 20)) / 50) / 100,
+    Math.round((100 * songPopularity) / 100) / 100,
+    Math.round((100 * songTempo) / 200) / 100,
+  ];
+
+  //console.log(yValues);
+
+  new Chart(document.getElementById("bar-chart"), {
+    type: "bar",
+    data: {
+      labels: xLabels,
+      datasets: [
+        {
+          label: "Value",
+          backgroundColor: [
+            "#1DB954",
+            "#1DB954",
+            "#1DB954",
+            "#1DB954",
+            "#1DB954",
+            "#1DB954",
+            "#1DB954",
+            "#1DB954",
+            "#1DB954",
+          ],
+          data: yValues,
+        },
+      ],
+    },
+    options: {
+      tooltips: {
+        callbacks: {
+          title: function (tooltipItem, data) {
+            return data["labels"][tooltipItem[0]["index"]];
+          },
+          label: function (tooltipItem, data) {
+            return data["datasets"][0]["data"][tooltipItem["index"]];
+          },
+        },
+        backgroundColor: "#FFF",
+        titleFontSize: 16,
+        titleFontColor: "#0066ff",
+        bodyFontColor: "#000",
+        bodyFontSize: 14,
+        displayColors: false,
+      },
+      scales: {
+        xAxes: [
+          {
+            gridLines: {
+              display: false,
+            },
+            ticks: {
+              fontColor: "#000",
+              fontSize: 20,
+            },
+          },
+        ],
+        yAxes: [
+          {
+            gridLines: {
+              display: true,
+              color: "#d4d4d4",
+            },
+            ticks: {
+              fontColor: "#000",
+              fontSize: 20,
+            },
+          },
+        ],
+      },
+      legend: { display: false },
+      title: {
+        display: true,
+        text: "",
+        fontColor: "#000",
+        fontSize: 14,
+      },
+      animation: {
+        duration: 2000,
+      },
+      layout: {
+        padding: {
+          left: 20,
+          right: 20,
+          top: 20,
+          bottom: 20,
+        },
+      },
+    },
+  });
+
+
+};
