@@ -29,17 +29,14 @@
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col-md-4">
-				<div id="dance"></div>
-			<div class="col-md-4">
-				<div id="energy"></div>
-			<div class="col-md-4">
-				<div id="tempo"></div>
-			</div>
-		</div>
+<!-- Add 2 buttons -->
+<button onclick="update(danceability)">Dataset 1</button>
+<button onclick="update(energy)">Dataset 2</button>
 
-		<script src="https://d3js.org/d3.v4.js"></script>
+<!-- Create a div where the graph will take place -->
+<div id="density"></div>
+
+		<script src="https://d3js.org/d3.v5.js"></script>
 		<script src="https://d3js.org/d3-contour.v1.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
 		<script type="text/javascript" src="app.js"></script>
