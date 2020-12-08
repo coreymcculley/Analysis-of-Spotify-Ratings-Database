@@ -46,12 +46,10 @@
       <button id="search-btn" type="artist-button" class="col-md-12 btn btn-primary" style="background: #1DB954;">Search Artist</button>
       <h5>Song:</h5>
       <select id="selDataset" onchange="optionChanged(this.value)"></select>
-
-      <!-- <select id="selDataset" onchange="optionChanged(this.value)"></select> -->
     </div>
   </div>
     
-  <div class="col-md-12 text-center text-header graph-margin">   
+  <div class="col-md-10 text-center text-link graph-margin">   
     <h3>Tracks Released</h3>
     <div class="tracksReleased" id="tracksReleased">
       <img src="placeholder.jpg">
@@ -68,10 +66,10 @@
   <div class="col-md-5 text-center text-header graph-margin">
     <h3>Track Characteristics Plot</h3>
     <div class="barChart bar">
-      <canvas id="bar-chart" width="800" height="450"></canvas>
+      <canvas id="bar-chart" width="800" height="770"></canvas>
     </div>
   </div>
-<hr>
+
 
 <!-- Chart.js JavaScript -->
 <script  src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
@@ -86,10 +84,7 @@
 
 </body>
 <!-- Footer -->
-<footer class="page-footer font-small pt-4">
-
-  <!-- Footer Links -->
-  <div class="container-fluid text-center text-md-left">
+<footer class="page-footer col-md-12 font-small pt-4">
 
   <!-- Copyright -->
   <div class="footer-copyright text-center py-3" style="color:#1DB954;" >
@@ -102,4 +97,3 @@
 
 </footer>
 </html>
-

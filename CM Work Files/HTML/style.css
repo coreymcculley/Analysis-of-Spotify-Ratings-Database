@@ -71,8 +71,9 @@
 }
 
 .legend {
-  font-family: 'Raleway', sans-serif;
-  fill: #333333;
+  font-family: Helvetica;
+  fill: black;
+  font-size: 40;
 }
 
 .tooltip {
@@ -81,10 +82,10 @@
 
 .radarChart {
     fill: #333333;
-    background: white;
+    background: #ededed;
 }
 
 .bar {
   fill: #333333;
-  background: white;
+  background: #ededed;
 }

@@ -1,6 +1,6 @@
 //function init() {
 d3.csv("clean_data.csv", function (importedData) {
-  var songID = 10;
+  var songID = 50;
   var bandID = "The Beatles";
 
   artistData = [];
@@ -91,8 +91,8 @@ d3.csv("clean_data.csv", function (importedData) {
   //////////////////////// Set-Up //////////////////////////////
   //////////////////////////////////////////////////////////////
 
-  var margin = { top: 60, right: 40, bottom: 40, left: 00 },
-    legendPosition = { x: 100, y: 100 },
+  var margin = { top: 90, right: 200, bottom: 70, left: 90 },
+    legendPosition = { x: 0, y: 0 },
     width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
     height = Math.min(
       width,
@@ -139,7 +139,7 @@ d3.csv("clean_data.csv", function (importedData) {
 
   console.log(data);
 
-  var color = d3.scale.ordinal().range(["#EDC951", "#342ca8"]);
+  var color = d3.scale.ordinal().range(["#1DB954", "#342ca8"]);
 
   var radarChartOptions = {
     w: width,
@@ -210,7 +210,7 @@ d3.csv("clean_data.csv", function (importedData) {
             },
             ticks: {
               fontColor: "#000",
-              fontSize: 10,
+              fontSize: 20,
             },
           },
         ],
@@ -218,11 +218,11 @@ d3.csv("clean_data.csv", function (importedData) {
           {
             gridLines: {
               display: true,
-              color: "#e6e6e6",
+              color: "#d4d4d4",
             },
             ticks: {
               fontColor: "#000",
-              fontSize: 10,
+              fontSize: 20,
             },
           },
         ],
@@ -239,10 +239,10 @@ d3.csv("clean_data.csv", function (importedData) {
       },
       layout: {
         padding: {
-          left: 50,
-          right: 50,
-          top: 50,
-          bottom: 50,
+          left: 20,
+          right: 20,
+          top: 20,
+          bottom: 20,
         },
       },
     },
