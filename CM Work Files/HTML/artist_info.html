@@ -42,7 +42,7 @@
   <div class="col-md-2" style="margin-top:20px; ">   
     <div class="text-left text-link search-margin">
       <h5 >Artist:</h5>
-      <input class="form-control " id= "artist-search" type="text" placeholder="Led Zepplin" aria-label="Search">
+      <input class="form-control " id= "artist-search" type="text" placeholder="Led Zeppelin" aria-label="Search">
       <button id="search-btn" type="artist-button" class="col-md-12 btn btn-primary" style="background: #1DB954;">Search Artist</button>
       <!-- <h5>Song:</h5>
       <select id="selDataset" onchange="optionChanged(this.value)"></select> -->
@@ -57,13 +57,15 @@
     </div>
   </div>
     <br>
-    <div class="col-md-12 text-left text-link search-margin">
-      <h5>Song:</h5>
+    <div class="col-md-12 search-margin">
+      <h5 class = "text-left text-link">Song:</h5>
       <select id="selDataset" onchange="optionChanged(this.value)"></select>
         <!-- <img src="placeholder.jpg"> -->
     </div>
   <div class="col-md-5 text-center text-header graph-margin">
     <h3>Radar Plot</h3>
+    <h5 class = "col-md-6 text-left" style="color:#342ca8;"><b>Average</b></h5>
+    <h5 class = "col-md-6 text-right"style="color: #1DB954"><b>Song</b></h5>
     <div class="radarChart" id="radarChart">
       <!-- <img src="placeholder.jpg"> -->
     </div>
@@ -71,7 +73,7 @@
   <div class="col-md-5 text-center text-header graph-margin">
     <h3>Track Characteristics Plot</h3>
     <div class="barChart bar">
-      <canvas id="bar-chart" width="800" height="770"></canvas>
+      <canvas id="bar-chart" width="800" height="800"></canvas>
     </div>
   </div>
 

@@ -1,24 +1,52 @@
 //function init() {
 d3.csv("clean_data.csv", function (importedData) {
-  var songID = 50;
-  var bandID = "The Beatles";
+  var songID = 0;
+  var bandID = "Led Zeppelin";
 
   artistData = [];
   var artistData = importedData; //.filter(function(d){ return  (d.artists == bandID)});
   console.log(artistData);
 
-  // //BuildDropdown
-  // var artistDataDropdown = importedData.filter(function(d){ return  (d.artists == bandID)});
-  // var songDataDropdown =artistDataDropdown.name;
-  // console.log(songDataDropdown);
-  // // Select the dropdown and build the Subject ID dropdown
-  // const subjectselect = d3.select("#selDataset");
+  // var filterData = artistData.filter(function(d){ return  (d.artists == bandID)});
+  // console.log(filterData);
 
-  // songDataDropdown.forEach(namevalue =>{
-  //     var option = subjectselect.append("option");
-  //     option.text(namevalue);
-  //     option.attr("value",namevalue);
-  // });
+  //Get input from the text box, filter for the matching dates and output table of results.
+  //Also include an error popup if searched data does not match the anything in the provided data.
+  var button = d3.select("#search-btn");
+  //filter data based on user input
+  button.on("click", function () {
+    filteredData = [];
+    d3.event.preventDefault();
+    // Select the input element and get the raw HTML node
+    var inputElement = d3.select("#artist-search");
+    // Get the value property of the input element
+    var inputValue = inputElement.property("value");
+    console.log(inputValue);
+
+    var filteredData = [];
+    for (var i = 0; i < artistData.length; i++) {
+      filteredData[i] = artistData[i].artists;
+    }
+    var filterIndex = [];
+    for (var i = 0; i < artistData.length; i++) {
+      if (filteredData[i] == inputValue) {
+        filterIndex.push(i);
+      }
+    }
+    var filteredDB = [];
+    var songList = [];
+    for (var i = 0; i < filterIndex.length; i++) {
+      filteredDB[i] = artistData[filterIndex[i]];
+      songList[i] = artistData[filterIndex[i]].name;
+    }
+    console.log(songList);
+    removeOptions(document.getElementById('selDataset'));
+    buildDropDown(songList);
+
+    if (Object.keys(filterIndex).length === 0) {
+      errorPopup();
+    }
+  });
 
   var bandNameAll = [];
   var songNamesAll = [];
@@ -85,6 +113,12 @@ d3.csv("clean_data.csv", function (importedData) {
     songTempo[i] = songTempoAll[subjectindex[i]];
   }
 
+  //console.log(songNames);
+
+  //BuildDropdown
+  // Select the dropdown and build the Subject ID dropdown
+  buildDropDown(songNames);
+
   /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
 
   //////////////////////////////////////////////////////////////
@@ -139,7 +173,7 @@ d3.csv("clean_data.csv", function (importedData) {
 
   console.log(data);
 
-  var color = d3.scale.ordinal().range(["#1DB954", "#342ca8"]);
+  var color = d3.scale.ordinal().range(["#342ca8", "#1DB954"]);
 
   var radarChartOptions = {
     w: width,
@@ -151,6 +185,7 @@ d3.csv("clean_data.csv", function (importedData) {
     roundStrokes: true,
     color: color,
   };
+
   //Call function to draw the Radar chart
   RadarChart(".radarChart", data, radarChartOptions);
 
@@ -166,18 +201,18 @@ d3.csv("clean_data.csv", function (importedData) {
     "Tempo",
   ];
   var yValues = [
-    songValence[songID],
-    songAcousticness[songID],
-    songDanceability[songID],
-    songEnergy[songID],
-    songExplicit[songID],
-    songLiveness[songID],
-    (-songLoudness[songID] + 20) / 50,
-    songPopularity[songID] / 100,
-    songTempo[songID] / 200,
+    Math.round(100 * songValence[songID]) / 100,
+    Math.round(100 * songAcousticness[songID]) / 100,
+    Math.round(100 * songDanceability[songID]) / 100,
+    Math.round(100 * songEnergy[songID]) / 100,
+    Math.round(100 * songExplicit[songID]) / 100,
+    Math.round(100 * songLiveness[songID]) / 100,
+    Math.round((100 * (-songLoudness[songID] + 20)) / 50) / 100,
+    Math.round((100 * songPopularity[songID]) / 100) / 100,
+    Math.round((100 * songTempo[songID]) / 200) / 100,
   ];
 
-//console.log(yValues);
+  //console.log(yValues);
 
   new Chart(document.getElementById("bar-chart"), {
     type: "bar",
@@ -202,6 +237,22 @@ d3.csv("clean_data.csv", function (importedData) {
       ],
     },
     options: {
+      tooltips: {
+        callbacks: {
+          title: function (tooltipItem, data) {
+            return data["labels"][tooltipItem[0]["index"]];
+          },
+          label: function (tooltipItem, data) {
+            return data["datasets"][0]["data"][tooltipItem["index"]];
+          },
+        },
+        backgroundColor: "#FFF",
+        titleFontSize: 16,
+        titleFontColor: "#0066ff",
+        bodyFontColor: "#000",
+        bodyFontSize: 14,
+        displayColors: false,
+      },
       scales: {
         xAxes: [
           {
@@ -264,12 +315,12 @@ function RadarChart(id, data, options) {
     w: 600, //Width of the circle
     h: 600, //Height of the circle
     margin: { top: 20, right: 20, bottom: 20, left: 20 }, //The margins of the SVG
-    levels: 3, //How many levels or inner circles should there be drawn
+    levels: 4, //How many levels or inner circles should there be drawn
     maxValue: 0, //What is the value that the biggest circle will represent
     labelFactor: 1.25, //How much farther than the radius of the outer circle should the labels be placed
     wrapWidth: 60, //The number of pixels after which a label needs to be given a new line
     opacityArea: 0.35, //The opacity of the area of the blob
-    dotRadius: 4, //The size of the colored circles of each blog
+    dotRadius: 5, //The size of the colored circles of each blog
     opacityCircles: 0.1, //The opacity of the circles of each blob
     strokeWidth: 2, //The width of the stroke around each blob
     roundStrokes: false, //If true the area and stroke will follow a round path (cardinal-closed)
@@ -631,3 +682,26 @@ function calcAverage(array) {
 }
 
 //init();
+function errorPopup() {
+  alert("Date does not match artist in the database");
+}
+
+function buildDropDown(list) {
+  //BuildDropdown
+  // Select the dropdown and build the Subject ID dropdown
+  const subjectselect = d3.select("#selDataset");
+
+  list.forEach((namevalue) => {
+    var option = subjectselect.append("option");
+    option.text(namevalue);
+    option.attr("value", namevalue);
+  });
+}
+
+function removeOptions(selectElement) {
+  var i,
+    L = selectElement.options.length - 1;
+  for (i = L; i >= 0; i--) {
+    selectElement.remove(i);
+  }
+}
