@@ -248,41 +248,36 @@
   });
 
 
-// function to initially populate the page with the first decade
-function initialDecade() {
+// // function to initially populate the page with the first decade
+// function initialDecade() {
 
-  // Get a reference to the decade dropdown
-  var dropdown = d3.select("#selDataset");
+//   // Get a reference to the decade dropdown
+//   var dropdown = d3.select("#selDataset");
 
-  // Populate the decade dropdown
-  d3.csv("clean_data_all.csv").then((data) => {
+//   // Populate the decade dropdown
+//   d3.csv("clean_data_all.csv").then((data) => {
 
-    var decade = [];
+//     var decade = ["1920", "1930", "1940", "1950", "1960", "1970", "1980", "1990", "2000", "2010", "2020"];
 
-    for (var i = 0; i < data.length; i++) {
-      decade[i] = data[i].decade;
-    }
+//     decade.forEach((dec) => {
+//         dropdown
+//         .append("option")
+//         .text(dec)
+//         .property("value", dec);
+//       });
 
- 
-    decade.forEach((dec) => {
-        dropdown
-        .append("option")
-        .text(dec)
-        .property("value", dec);
-      });
+//     // console.log(decade)
 
-    // console.log(decade)
+//     var initial = decade[0];
+// //     console.log(initial);
+//     xScale(initial);
+  // });
+// };
 
-    var initial = decade[0];
-//     console.log(initial);
-    xScale(initial);
-  });
-};
+// // // function to handle a change in the decade dropdown 
+// function optionChanged(changeDecade) {
+//   xScale(changeDecade);
+// };
 
-// // function to handle a change in the decade dropdown 
-function optionChanged(changeDecade) {
-  xScale(changeDecade);
-};
-
-// Initial load of the charts and metadata panel based on 1st subject ID
-initialDecade();
+// // Initial load of the charts and metadata panel based on 1st subject ID
+// initialDecade();
