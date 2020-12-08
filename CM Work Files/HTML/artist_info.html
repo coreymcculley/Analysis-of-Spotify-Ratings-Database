@@ -44,8 +44,8 @@
       <h5 >Artist:</h5>
       <input class="form-control " id= "artist-search" type="text" placeholder="Led Zepplin" aria-label="Search">
       <button id="search-btn" type="artist-button" class="col-md-12 btn btn-primary" style="background: #1DB954;">Search Artist</button>
-      <h5>Song:</h5>
-      <select id="selDataset" onchange="optionChanged(this.value)"></select>
+      <!-- <h5>Song:</h5>
+      <select id="selDataset" onchange="optionChanged(this.value)"></select> -->
     </div>
   </div>
     
@@ -57,6 +57,11 @@
     </div>
   </div>
     <br>
+    <div class="col-md-12 text-left text-link search-margin">
+      <h5>Song:</h5>
+      <select id="selDataset" onchange="optionChanged(this.value)"></select>
+        <!-- <img src="placeholder.jpg"> -->
+    </div>
   <div class="col-md-5 text-center text-header graph-margin">
     <h3>Radar Plot</h3>
     <div class="radarChart" id="radarChart">
@@ -89,7 +94,7 @@
   <!-- Copyright -->
   <div class="footer-copyright text-center py-3" style="color:#1DB954;" >
     <i class="fab fa-spotify"></i>
-    <a  style="color:#1DB954;" href="https://spotify.com">Spotify</a>
+    <a  style="color:#1DB954;" href="https://spotify.com">Spotify | </a>
     © 2020 Copyright:
     <a style="color:#1DB954;" href="https://mdbootstrap.com/"> MDBootstrap.com</a>
   </div>
