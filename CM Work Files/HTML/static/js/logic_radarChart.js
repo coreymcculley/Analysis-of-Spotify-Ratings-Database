@@ -1,8 +1,8 @@
 //function init() {
 d3.csv("clean_data.csv", function (importedData) {
-  var songID = 0;
-  var song = "Hey Jude";
-  var bandID = "The Beatles";
+
+  var song = "";
+  var bandID = "";
 
   artistData = [];
   var artistData = importedData; //.filter(function(d){ return  (d.artists == bandID)});
@@ -46,261 +46,84 @@ d3.csv("clean_data.csv", function (importedData) {
     removeOptions(document.getElementById('selDataset'));
     buildDropDown(songList);
 
+    var songElement = d3.select("#selDataset");
+    // Get the value property of the input element
+    var songValue = songElement.property("value");
+    console.log(songValue);
+
+    d3.selectAll("#selDataset").on("change", songUpdate("The Who", "Pinball Wizard", artistData));
+
     if (Object.keys(filterIndex).length === 0) {
       errorPopup();
     }
   });
 
-  var bandNameAll = [];
-  var songNamesAll = [];
-  var songValenceAll = [];
-  var songAcousticnessAll = [];
-  var songDanceabilityAll = [];
-  var songEnergyAll = [];
-  var songExplicitAll = [];
-  var songLivenessAll = [];
-  var songLoudnessAll = [];
-  var songPopularityAll = [];
-  var songSpeechinessAll = [];
-  var songTempoAll = [];
-  var subjectindex = [];
+  // var bandNameAll = [];
+  // var songNamesAll = [];
+  // var songValenceAll = [];
+  // var songAcousticnessAll = [];
+  // var songDanceabilityAll = [];
+  // var songEnergyAll = [];
+  // var songExplicitAll = [];
+  // var songLivenessAll = [];
+  // var songLoudnessAll = [];
+  // var songPopularityAll = [];
+  // var songSpeechinessAll = [];
+  // var songTempoAll = [];
+  // var subjectindex = [];
 
-  for (var i = 0; i < artistData.length; i++) {
-    bandNameAll[i] = artistData[i].artists;
-    songNamesAll[i] = artistData[i].name;
-    songValenceAll[i] = artistData[i].energy;
-    songAcousticnessAll[i] = artistData[i].acousticness;
-    songDanceabilityAll[i] = artistData[i].danceability;
-    songEnergyAll[i] = artistData[i].energy;
-    songExplicitAll[i] = artistData[i].explicit;
-    songLivenessAll[i] = artistData[i].liveness;
-    songLoudnessAll[i] = artistData[i].loudness;
-    songPopularityAll[i] = artistData[i].popularity;
-    songSpeechinessAll[i] = artistData[i].speechiness;
-    songTempoAll[i] = artistData[i].tempo;
-  }
+  // for (var i = 0; i < artistData.length; i++) {
+  //   bandNameAll[i] = artistData[i].artists;
+  //   songNamesAll[i] = artistData[i].name;
+  //   songValenceAll[i] = artistData[i].energy;
+  //   songAcousticnessAll[i] = artistData[i].acousticness;
+  //   songDanceabilityAll[i] = artistData[i].danceability;
+  //   songEnergyAll[i] = artistData[i].energy;
+  //   songExplicitAll[i] = artistData[i].explicit;
+  //   songLivenessAll[i] = artistData[i].liveness;
+  //   songLoudnessAll[i] = artistData[i].loudness;
+  //   songPopularityAll[i] = artistData[i].popularity;
+  //   songSpeechinessAll[i] = artistData[i].speechiness;
+  //   songTempoAll[i] = artistData[i].tempo;
+  // }
 
-  // console.log(bandName.length);
+  // // // console.log(bandName.length);
 
-  for (var i = 0; i < artistData.length; i++) {
-    if (bandNameAll[i] == bandID) {
-      subjectindex.push(i);
-    }
-  }
+  // for (var i = 0; i < artistData.length; i++) {
+  //   if (bandNameAll[i] == bandID) {
+  //     subjectindex.push(i);
+  //   }
+  // }
 
-  var bandName = [];
-  var songNames = [];
-  var songValence = [];
-  var songAcousticness = [];
-  var songDanceability = [];
-  var songEnergy = [];
-  var songExplicit = [];
-  var songLiveness = [];
-  var songLoudness = [];
-  var songPopularity = [];
-  var songSpeechiness = [];
-  var songTempo = [];
+  // var bandName = [];
+  // var songNames = [];
+  // var songValence = [];
+  // var songAcousticness = [];
+  // var songDanceability = [];
+  // var songEnergy = [];
+  // var songExplicit = [];
+  // var songLiveness = [];
+  // var songLoudness = [];
+  // var songPopularity = [];
+  // var songSpeechiness = [];
+  // var songTempo = [];
 
-  for (var i = 0; i < subjectindex.length; i++) {
-    bandName[i] = bandNameAll[subjectindex[i]];
-    songNames[i] = songNamesAll[subjectindex[i]];
-    songValence[i] = songValenceAll[subjectindex[i]];
-    songAcousticness[i] = songAcousticnessAll[subjectindex[i]];
-    songDanceability[i] = songDanceabilityAll[subjectindex[i]];
-    songEnergy[i] = songEnergyAll[subjectindex[i]];
-    songExplicit[i] = songExplicitAll[subjectindex[i]];
-    songLiveness[i] = songLivenessAll[subjectindex[i]];
-    songLoudness[i] = songLoudnessAll[subjectindex[i]];
-    songPopularity[i] = songPopularityAll[subjectindex[i]];
-    songSpeechiness[i] = songSpeechinessAll[subjectindex[i]];
-    songTempo[i] = songTempoAll[subjectindex[i]];
-  }
+  // for (var i = 0; i < subjectindex.length; i++) {
+  //   bandName[i] = bandNameAll[subjectindex[i]];
+  //   songNames[i] = songNamesAll[subjectindex[i]];
+  //   songValence[i] = songValenceAll[subjectindex[i]];
+  //   songAcousticness[i] = songAcousticnessAll[subjectindex[i]];
+  //   songDanceability[i] = songDanceabilityAll[subjectindex[i]];
+  //   songEnergy[i] = songEnergyAll[subjectindex[i]];
+  //   songExplicit[i] = songExplicitAll[subjectindex[i]];
+  //   songLiveness[i] = songLivenessAll[subjectindex[i]];
+  //   songLoudness[i] = songLoudnessAll[subjectindex[i]];
+  //   songPopularity[i] = songPopularityAll[subjectindex[i]];
+  //   songSpeechiness[i] = songSpeechinessAll[subjectindex[i]];
+  //   songTempo[i] = songTempoAll[subjectindex[i]];
+  // }
 
-  //console.log(songNames);
-
-  //BuildDropdown
-  // Select the dropdown and build the Subject ID dropdown
-  buildDropDown(songNames);
-
-  // /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
-
-  // //////////////////////////////////////////////////////////////
-  // //////////////////////// Set-Up //////////////////////////////
-  // //////////////////////////////////////////////////////////////
-
-  // var margin = { top: 90, right: 200, bottom: 70, left: 90 },
-  //   legendPosition = { x: 0, y: 0 },
-  //   width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
-  //   height = Math.min(
-  //     width,
-  //     window.innerHeight - margin.top - margin.bottom - 20
-  //   );
-
-  // //////////////////////////////////////////////////////////////
-  // ////////////////////////// Data //////////////////////////////
-  // //////////////////////////////////////////////////////////////
-
-  // console.log(songNames[songID]);
-
-  // var data = [
-  //   [
-  //     //Average
-  //     { axis: "Valence", value: calcAverage(songValence) },
-  //     { axis: "Acousticness", value: calcAverage(songAcousticness) },
-  //     { axis: "Danceability", value: calcAverage(songDanceability) },
-  //     { axis: "Energy", value: calcAverage(songEnergy) },
-  //     { axis: "Explicit", value: calcAverage(songExplicit) },
-  //     { axis: "Liveness", value: calcAverage(songLiveness) },
-  //     { axis: "Loudness", value: (-calcAverage(songLoudness) + 20) / 50 },
-  //     { axis: "Popularity", value: calcAverage(songPopularity) / 100 },
-  //     //{ axis: "Speechiness", value: calcAverage(songSpeechiness) },
-  //     { axis: "Tempo", value: calcAverage(songTempo) / 200 },
-  //   ],
-  //   [
-  //     //Song
-  //     { axis: "Valence", value: songValence[songID] },
-  //     { axis: "Acousticness", value: songAcousticness[songID] },
-  //     { axis: "Danceability", value: songDanceability[songID] },
-  //     { axis: "Energy", value: songEnergy[songID] },
-  //     { axis: "Explicit", value: songExplicit[songID] },
-  //     { axis: "Liveness", value: songLiveness[songID] },
-  //     { axis: "Loudness", value: (-songLoudness[songID] + 20) / 50 },
-  //     { axis: "Popularity", value: songPopularity[songID] / 100 },
-  //     //{ axis: "Speechiness", value: songSpeechiness[songID] },
-  //     { axis: "Tempo", value: songTempo[songID] / 200 },
-  //   ],
-  // ];
-  // //////////////////////////////////////////////////////////////
-  // //////////////////// Draw the Chart //////////////////////////
-  // //////////////////////////////////////////////////////////////
-
-  // console.log(data);
-
-  // var color = d3.scale.ordinal().range(["#342ca8", "#1DB954"]);
-
-  // var radarChartOptions = {
-  //   w: width,
-  //   h: height,
-  //   margin: margin,
-  //   legendPosition: legendPosition,
-  //   maxValue: 0.5,
-  //   levels: 5,
-  //   roundStrokes: true,
-  //   color: color,
-  // };
-
-  // //Call function to draw the Radar chart
-  // RadarChart(".radarChart", data, radarChartOptions);
-
-  // var xLabels = [
-  //   "Valence",
-  //   "Acousticness",
-  //   "Danceability",
-  //   "Energy",
-  //   "Explicit",
-  //   "Liveness",
-  //   "Loudness",
-  //   "Popularity",
-  //   "Tempo",
-  // ];
-  // var yValues = [
-  //   Math.round(100 * songValence[songID]) / 100,
-  //   Math.round(100 * songAcousticness[songID]) / 100,
-  //   Math.round(100 * songDanceability[songID]) / 100,
-  //   Math.round(100 * songEnergy[songID]) / 100,
-  //   Math.round(100 * songExplicit[songID]) / 100,
-  //   Math.round(100 * songLiveness[songID]) / 100,
-  //   Math.round((100 * (-songLoudness[songID] + 20)) / 50) / 100,
-  //   Math.round((100 * songPopularity[songID]) / 100) / 100,
-  //   Math.round((100 * songTempo[songID]) / 200) / 100,
-  // ];
-
-  // //console.log(yValues);
-
-  // new Chart(document.getElementById("bar-chart"), {
-  //   type: "bar",
-  //   data: {
-  //     labels: xLabels,
-  //     datasets: [
-  //       {
-  //         label: "Value",
-  //         backgroundColor: [
-  //           "#1DB954",
-  //           "#1DB954",
-  //           "#1DB954",
-  //           "#1DB954",
-  //           "#1DB954",
-  //           "#1DB954",
-  //           "#1DB954",
-  //           "#1DB954",
-  //           "#1DB954",
-  //         ],
-  //         data: yValues,
-  //       },
-  //     ],
-  //   },
-  //   options: {
-  //     tooltips: {
-  //       callbacks: {
-  //         title: function (tooltipItem, data) {
-  //           return data["labels"][tooltipItem[0]["index"]];
-  //         },
-  //         label: function (tooltipItem, data) {
-  //           return data["datasets"][0]["data"][tooltipItem["index"]];
-  //         },
-  //       },
-  //       backgroundColor: "#FFF",
-  //       titleFontSize: 16,
-  //       titleFontColor: "#0066ff",
-  //       bodyFontColor: "#000",
-  //       bodyFontSize: 14,
-  //       displayColors: false,
-  //     },
-  //     scales: {
-  //       xAxes: [
-  //         {
-  //           gridLines: {
-  //             display: false,
-  //           },
-  //           ticks: {
-  //             fontColor: "#000",
-  //             fontSize: 20,
-  //           },
-  //         },
-  //       ],
-  //       yAxes: [
-  //         {
-  //           gridLines: {
-  //             display: true,
-  //             color: "#d4d4d4",
-  //           },
-  //           ticks: {
-  //             fontColor: "#000",
-  //             fontSize: 20,
-  //           },
-  //         },
-  //       ],
-  //     },
-  //     legend: { display: false },
-  //     title: {
-  //       display: true,
-  //       text: "",
-  //       fontColor: "#000",
-  //       fontSize: 14,
-  //     },
-  //     animation: {
-  //       duration: 2000,
-  //     },
-  //     layout: {
-  //       padding: {
-  //         left: 20,
-  //         right: 20,
-  //         top: 20,
-  //         bottom: 20,
-  //       },
-  //     },
-  //   },
-  // });
+  
 });
 
 //THIS WILL REDRAW THE GRAPH WHEN THE DROPDOWN CHANGES
