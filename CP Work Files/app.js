@@ -73,8 +73,12 @@ function updateToolTip(chosenXAxis, circlesGroup) {
   else if (chosenXAxis === "energy") {
     var label = "Energy";
   }
+  else if(chosenXAxis === "speechiness") {
+    var label = "Speechiness";
+  }
   else {
-    var label = "Tempo";
+      var label = "Tempo";
+
   }
 
   var toolTip = d3.tip()
@@ -118,15 +122,9 @@ function charts(inputDecade) {
       data.popularity = +data.popularity;
       data.danceability = +data.danceability;
       data.energy = +data.energy;
+      data.speechiness = +data.speechiness;
       data.tempo = +data.tempo;
     });
-
-    // data.decade = filtered.decade;
-    // data.popularity = filtered.popularity;
-    // data.danceability = filtered.danceability;
-    // data.energy = filtered.energy;
-    // data.tempo = filtered.tempo;
-
 
     // xLinearScale function above csv import
     var xLinearScale = xScale(filteredDecades, chosenXAxis);
@@ -155,14 +153,11 @@ function charts(inputDecade) {
       .data(filteredDecades)
       .enter()
       .append("circle")
-      // .filter(function(d) {return d.popularity >= 70 })
-      // .filter(function(d) {return d.decade == 2010 })
-      // .filter(function(d) {return d.decade == chosenDecade })
       .attr("cx", d => xLinearScale(d[chosenXAxis]))
       .attr("cy", d => yLinearScale(d.popularity))
-      .attr("r", 5)
+      .attr("r", 6)
       .attr("fill", "green")
-      .attr("opacity", ".5");
+      .attr("opacity", ".3");
 
     // Create group for  3 x- axis labels
     var labelsGroup = chartGroup.append("g")
@@ -182,9 +177,16 @@ function charts(inputDecade) {
       .classed("inactive", true)
       .text("Energy");
 
-    var tempoLengthLabel = labelsGroup.append("text")
+    var speechinessLengthLabel = labelsGroup.append("text")
       .attr("x", 0)
       .attr("y", 60)
+      .attr("value", "speechiness") // value to grab for event listener
+      .classed("inactive", true)
+      .text("Speechiness");
+    
+    var tempoLengthLabel = labelsGroup.append("text")
+      .attr("x", 0)
+      .attr("y", 80)
       .attr("value", "tempo") // value to grab for event listener
       .classed("inactive", true)
       .text("Tempo");
@@ -237,6 +239,9 @@ function charts(inputDecade) {
             energyLengthLabel
               .classed("active", false)
               .classed("inactive", true);
+            speechinessLengthLabel
+              .classed("active", false)
+              .classed("inactive", true);
             tempoLengthLabel
               .classed("active", false)
               .classed("inactive", true);
@@ -246,6 +251,23 @@ function charts(inputDecade) {
               .classed("active", false)
               .classed("inactive", true);
             energyLengthLabel
+              .classed("active", true)
+              .classed("inactive", false);
+            speechinessLengthLabel
+              .classed("active", false)
+              .classed("inactive", true);
+            tempoLengthLabel
+              .classed("active", false)
+              .classed("inactive", true);
+          }
+          else if (chosenXAxis === "speechiness") {
+            danceabilityLengthLabel
+              .classed("active", false)
+              .classed("inactive", true);
+            energyLengthLabel
+              .classed("active", false)
+              .classed("inactive", true);
+            speechinessLengthLabel
               .classed("active", true)
               .classed("inactive", false);
             tempoLengthLabel
@@ -259,9 +281,12 @@ function charts(inputDecade) {
             energyLengthLabel
               .classed("active", false)
               .classed("inactive", true);
+            speechinessLengthLabel
+              .classed("active", false)
+              .classed("inactive", true);
             tempoLengthLabel
               .classed("active", true)
-              .classed("inactive", false);
+              .classed("inactive", true);
           }
         }
       });
@@ -277,7 +302,7 @@ var svgHeight = 500;
 var margin = {
   top: 20,
   right: 40,
-  bottom: 100,
+  bottom: 120,
   left: 100
 };
 
