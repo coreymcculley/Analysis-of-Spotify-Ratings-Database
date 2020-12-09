@@ -58,25 +58,25 @@ d3.csv("clean_data.csv", function (importedData) {
   });
 });
 
-  var dropdownButton = d3.select("#selDataset").append("select");
+  // var dropdownButton = d3.select("#selDataset").append("select");
 
-  // When the button is changed, run the updateChart function
-  dropdownButton.on("change", function (d) {
-    d3.csv("clean_data.csv", function (importedData) {
-      // recover the option that has been chosen
-      var songValue = d3.select(this).property("value");
-      console.log(songValue);
-      var artistData = importedData;
+  // // When the button is changed, run the updateChart function
+  // dropdownButton.on("change", function (d) {
+  //   d3.csv("clean_data.csv", function (importedData) {
+  //     // recover the option that has been chosen
+  //     var songValue = d3.select(this).property("value");
+  //     console.log(songValue);
+  //     var artistData = importedData;
 
-      //get band name
-      var bandElement = d3.select("#artist-search");
-      // Get the value property of the input element
-      var band = bandElement.property("value");
-      // run the updateChart function with this selected option
-      console.log(band);
-      songUpdate(band, songValue, artistData);
-    });
-  });
+  //     //get band name
+  //     var bandElement = d3.select("#artist-search");
+  //     // Get the value property of the input element
+  //     var band = bandElement.property("value");
+  //     // run the updateChart function with this selected option
+  //     console.log(band);
+  //     songUpdate(band, songValue, artistData);
+  //   });
+  // });
   
 
 /////////////////////////////////////////////////////////
@@ -92,7 +92,7 @@ function RadarChart(id, data, options) {
     h: 600, //Height of the circle
     margin: { top: 20, right: 20, bottom: 20, left: 20 }, //The margins of the SVG
     levels: 4, //How many levels or inner circles should there be drawn
-    maxValue: 0, //What is the value that the biggest circle will represent
+    maxValue: 0.0, //What is the value that the biggest circle will represent
     labelFactor: 1.25, //How much farther than the radius of the outer circle should the labels be placed
     wrapWidth: 60, //The number of pixels after which a label needs to be given a new line
     opacityArea: 0.35, //The opacity of the area of the blob
@@ -113,16 +113,17 @@ function RadarChart(id, data, options) {
   } //if
 
   //If the supplied maxValue is smaller than the actual one, replace by the max in the data
-  var maxValue = Math.max(
-    cfg.maxValue,
-    d3.max(data, function (i) {
-      return d3.max(
-        i.map(function (o) {
-          return o.value;
-        })
-      );
-    })
-  );
+  var maxValue = 1;
+  // Math.max(
+  //   cfg.maxValue,
+  //   d3.max(data, function (i) {
+  //     return d3.max(
+  //       i.map(function (o) {
+  //         return o.value;
+  //       })
+  //     );
+  //   })
+  // );
 
   var allAxis = data[0].map(function (i, j) {
       return i.axis;
@@ -650,7 +651,7 @@ function songUpdate(song) {
     h: height,
     margin: margin,
     legendPosition: legendPosition,
-    maxValue: 0.5,
+    maxValue: 1,
     levels: 5,
     roundStrokes: true,
     color: color,
@@ -732,6 +733,8 @@ function songUpdate(song) {
             ticks: {
               fontColor: "#000",
               fontSize: 14,
+              beginAtZero: true,
+              max: 1,
             },
           },
         ],
