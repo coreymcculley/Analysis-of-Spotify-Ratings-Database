@@ -5,7 +5,7 @@ d3.csv("clean_data.csv", function (importedData) {
 
   artistData = [];
   var artistData = importedData; //.filter(function(d){ return  (d.artists == bandID)});
-  console.log(artistData);
+  //console.log(artistData);
 
   songUpdate(song); //bandID, song, artistData
   // var filterData = artistData.filter(function(d){ return  (d.artists == bandID)});
@@ -40,10 +40,10 @@ d3.csv("clean_data.csv", function (importedData) {
       filteredDB[i] = artistData[filterIndex[i]];
       songList[i] = artistData[filterIndex[i]].name;
     }
-    console.log(songList);
+    //console.log(songList);
     removeOptions(document.getElementById("selDataset"));
     buildDropDown(songList);
-
+    updateBar(inputValue);
     // var songElement = d3.select("#selDataset");
     // // Get the value property of the input element
     // var songValue = songElement.property("value");
@@ -488,7 +488,7 @@ function songUpdate(song) {
     var inputElement = d3.select("#artist-search");
     // Get the value property of the input element
     var band = inputElement.property("value");
-    console.log(band);
+    //console.log(band);
 
     // //Select Song
     // var dropdownButton = d3.select("#selDataset").append("select");
@@ -551,7 +551,7 @@ function songUpdate(song) {
       }
     }
 
-    console.log(subjectindex);
+    //console.log(subjectindex);
 
     for (var i = 0; i < artistData.length; i++) {
       if (bandNameAll[i] == bandID) {
@@ -559,7 +559,7 @@ function songUpdate(song) {
       }
     }
 
-    console.log(subjectindex);
+    //console.log(subjectindexAll);
 
     bandName = bandNameAll[subjectindex];
     songNames = songNamesAll[subjectindex];
@@ -588,8 +588,8 @@ function songUpdate(song) {
       songSpeechinessAvg[i] = songSpeechinessAll[subjectindexAll[i]];
       songTempoAvg[i] = songTempoAll[subjectindexAll[i]];
     }
-    console.log(songDanceability);
-    console.log(songDanceabilityAvg);
+    //console.log(songDanceability);
+    //console.log(songDanceabilityAvg);
     //////////////////////////////////////////////////////////////
     //////////////////////// Set-Up //////////////////////////////
     //////////////////////////////////////////////////////////////
@@ -607,7 +607,7 @@ function songUpdate(song) {
     ////////////////////////// Data //////////////////////////////
     //////////////////////////////////////////////////////////////
 
-    console.log(songNames);
+    //console.log(songNames);
 
     var data = [
       [
@@ -641,7 +641,7 @@ function songUpdate(song) {
     //////////////////// Draw the Chart //////////////////////////
     //////////////////////////////////////////////////////////////
 
-    console.log(data);
+    //console.log(data);
 
     var color = d3.scale.ordinal().range(["#342ca8", "#1DB954"]);
 
@@ -684,7 +684,11 @@ function songUpdate(song) {
 
     //console.log(yValues);
 
-    new Chart(document.getElementById("bar-chart"), {
+    var ctx = $('#bar-chart');
+
+    ctx.height(500);
+
+    new Chart(ctx, {
       type: "bar",
       data: {
         labels: xLabels,
@@ -707,6 +711,7 @@ function songUpdate(song) {
         ],
       },
       options: {
+        maintainAspectRatio: false,
         tooltips: {
           callbacks: {
             title: function (tooltipItem, data) {
