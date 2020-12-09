@@ -23,3 +23,8 @@ text-align: center;
   display: block;
   margin: auto;
 }
+.tooltipimage {
+  height: 100px;
+  width: 100px;
+  display: block;
+}
