@@ -1,0 +1,91 @@
+/* body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  fill: #242424;
+  text-align: center;
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+  cursor: default;
+} */
+
+.bgimage {
+  position: relative;
+  height: 350px;
+  padding: 20px;
+  margin: 20px;
+  background: white;
+  background-image: url("../../spotify-theme-music-bkg-dark.jpg");
+  /* background-attachment: fixed; */
+  background-position: bottom center;
+  background-size: cover;
+  color:white;
+}
+
+.btn-style {
+  width: 250px;
+  /* padding: 5px; */
+  background: #1DB954;
+  font-weight: bold;
+  color:white;
+}
+
+.graph-margin{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.search-margin{
+  margin-top: 50px;
+  margin-left: 50px;
+}
+
+.text-header{
+  color: white;
+  font-size: 20;
+  margin-left: 100px;
+}
+
+.text-body{
+  color: white;
+  font-size: 25;
+}
+
+.text-def{
+  color: white;
+  margin-top: 25px;
+}
+
+.text-margin{
+  margin-left: 200px;
+  margin-right: 200px;
+
+}
+
+.text-link{
+  color: white;
+  font-size: 40;
+}
+
+.background{
+  background: #1d1e22;
+}
+
+.legend {
+  font-family: Helvetica;
+  fill: black;
+  font-size: 40;
+}
+
+.tooltip {
+  fill: #333333;
+}
+
+.radarChart {
+    fill: #333333;
+    background: #ededed;
+}
+
+.bar {
+  fill: #333333;
+  background: #ededed;
+}
