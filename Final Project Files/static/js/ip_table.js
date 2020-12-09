@@ -30,21 +30,22 @@ var tabulate = function (data, columns) {
     return table;
 }
 
-d3.csv("clean_data_all.csv", function (error, tableData) {
-    if (error) throw error;
+function makeTable(){
+    d3.csv("clean_data_all.csv", function (error, tableData) {
+        if (error) throw error;
 
-    decadeID = '2000';
-    decadeData = tableData.filter(d => d.Decade == decadeID);
-
-
-    top10Songs = decadeData.slice().sort((a, b) => d3.descending(a.Popularity, b.Popularity)).slice(0, 10)
-    console.log(top10Songs)
+        decadeID = '2000';
+        decadeData = tableData.filter(d => d.Decade == decadeID);
 
 
-    const columns = ['Release_Year', 'Artist_Band', 'Song', 'Genre', 'Popularity']
-    tabulate(top10Songs, columns)
-});
+        top10Songs = decadeData.slice().sort((a, b) => d3.descending(a.Popularity, b.Popularity)).slice(0, 10)
+        console.log(top10Songs)
 
+
+        const columns = ['Release_Year', 'Artist_Band', 'Song', 'Genre', 'Popularity']
+        tabulate(top10Songs, columns)
+    });
+};
 // d3.csv('clean_data_all.csv')
 //     .then(function (data) {
 //         const columns = ['year', 'artists', 'name', 'genres']

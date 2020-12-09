@@ -594,7 +594,7 @@ function songUpdate(song) {
     //////////////////////// Set-Up //////////////////////////////
     //////////////////////////////////////////////////////////////
 
-    var margin = { top: 90, right: 200, bottom: 70, left: 90 },
+    var margin = { top: 90, right:  200, bottom: 60, left: 90 },
       legendPosition = { x: 0, y: 0 },
       width =
         Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
@@ -684,9 +684,8 @@ function songUpdate(song) {
 
     //console.log(yValues);
 
-    var ctx = $('#bar-chart');
-
-    ctx.height(500);
+    var ctx = document.getElementById("bar-chart");
+    ctx.height = 500;
 
     new Chart(ctx, {
       type: "bar",

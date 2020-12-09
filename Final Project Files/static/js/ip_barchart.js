@@ -62,6 +62,24 @@ function updateBar(band){
                 ]
             },
             options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                tooltips: {
+                    callbacks: {
+                      title: function (tooltipItem, data) {
+                        return data["labels"][tooltipItem[0]["index"]];
+                      },
+                      label: function (tooltipItem, data) {
+                        return data["datasets"][0]["data"][tooltipItem["index"]];
+                      },
+                    },
+                    backgroundColor: "#FFF",
+                    titleFontSize: 16,
+                    titleFontColor: "#0066ff",
+                    bodyFontColor: "#000",
+                    bodyFontSize: 16,
+                    displayColors: false,
+                  },
                 scales: {
                     xAxes: [{
                         gridLines: {
@@ -87,8 +105,8 @@ function updateBar(band){
                 title: {
                     display: true,
                     text: [bandName[0]],
-                    fontColor: "white",
-                    fontSize: 20
+                    fontColor: "Black",
+                    fontSize: 30
                 },
                 animation: {
                     duration: 2000,

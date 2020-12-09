@@ -35,18 +35,12 @@
   <div class="col-md-2">   
     <div class="text-center text-link">
       <h5>Decade:</h5>
-      <select id="selDataset" onchange="optionChanged(this.value)"></select>
+      <select id="selDataset" onchange="makeTable(this.value)"></select>
     </div>
   </div>
-    
-  <div class="col-md-4 text-center text-header">   
-    <h3>Top Ten Artists</h3>
-    <div class="top10artists" id="top10artists">
+  
 
-    </div>
-  </div>
-
-  <div class="col-md-4 text-center text-header">   
+  <div class="col-md-8 text-center text-header">   
     <h3>Top Ten Songs</h3>
     <div class="top10songs" id="top10songs">
     </div>
@@ -62,7 +56,9 @@
   <script src="https://kit.fontawesome.com/951076ae2f.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  
+  <script src="./static/js/ip_table.js"></script>
+
+
 </body>
 
 <!-- Footer -->
