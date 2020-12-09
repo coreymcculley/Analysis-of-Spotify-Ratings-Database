@@ -1,15 +1,13 @@
 //function init() {
 d3.csv("clean_data.csv", function (importedData) {
-
-  var song = "";
-  var bandID = "";
+  var song = "Pinball Wizard";
+  var bandID = "The Who";
 
   artistData = [];
   var artistData = importedData; //.filter(function(d){ return  (d.artists == bandID)});
   console.log(artistData);
 
-
-  songUpdate(bandID, song, artistData);
+  songUpdate(song);//bandID, song, artistData
   // var filterData = artistData.filter(function(d){ return  (d.artists == bandID)});
   // console.log(filterData);
 
@@ -43,91 +41,43 @@ d3.csv("clean_data.csv", function (importedData) {
       songList[i] = artistData[filterIndex[i]].name;
     }
     console.log(songList);
-    removeOptions(document.getElementById('selDataset'));
+    removeOptions(document.getElementById("selDataset"));
     buildDropDown(songList);
 
-    var songElement = d3.select("#selDataset");
-    // Get the value property of the input element
-    var songValue = songElement.property("value");
-    console.log(songValue);
+    // var songElement = d3.select("#selDataset");
+    // // Get the value property of the input element
+    // var songValue = songElement.property("value");
+    // console.log(songValue);
 
-    d3.selectAll("#selDataset").on("change", songUpdate("The Who", "Pinball Wizard", artistData));
+
+    //d3.selectAll("selDataset").on("change", songUpdate(inputValue, songValue, artistData));
 
     if (Object.keys(filterIndex).length === 0) {
       errorPopup();
     }
   });
-
-  // var bandNameAll = [];
-  // var songNamesAll = [];
-  // var songValenceAll = [];
-  // var songAcousticnessAll = [];
-  // var songDanceabilityAll = [];
-  // var songEnergyAll = [];
-  // var songExplicitAll = [];
-  // var songLivenessAll = [];
-  // var songLoudnessAll = [];
-  // var songPopularityAll = [];
-  // var songSpeechinessAll = [];
-  // var songTempoAll = [];
-  // var subjectindex = [];
-
-  // for (var i = 0; i < artistData.length; i++) {
-  //   bandNameAll[i] = artistData[i].artists;
-  //   songNamesAll[i] = artistData[i].name;
-  //   songValenceAll[i] = artistData[i].energy;
-  //   songAcousticnessAll[i] = artistData[i].acousticness;
-  //   songDanceabilityAll[i] = artistData[i].danceability;
-  //   songEnergyAll[i] = artistData[i].energy;
-  //   songExplicitAll[i] = artistData[i].explicit;
-  //   songLivenessAll[i] = artistData[i].liveness;
-  //   songLoudnessAll[i] = artistData[i].loudness;
-  //   songPopularityAll[i] = artistData[i].popularity;
-  //   songSpeechinessAll[i] = artistData[i].speechiness;
-  //   songTempoAll[i] = artistData[i].tempo;
-  // }
-
-  // // // console.log(bandName.length);
-
-  // for (var i = 0; i < artistData.length; i++) {
-  //   if (bandNameAll[i] == bandID) {
-  //     subjectindex.push(i);
-  //   }
-  // }
-
-  // var bandName = [];
-  // var songNames = [];
-  // var songValence = [];
-  // var songAcousticness = [];
-  // var songDanceability = [];
-  // var songEnergy = [];
-  // var songExplicit = [];
-  // var songLiveness = [];
-  // var songLoudness = [];
-  // var songPopularity = [];
-  // var songSpeechiness = [];
-  // var songTempo = [];
-
-  // for (var i = 0; i < subjectindex.length; i++) {
-  //   bandName[i] = bandNameAll[subjectindex[i]];
-  //   songNames[i] = songNamesAll[subjectindex[i]];
-  //   songValence[i] = songValenceAll[subjectindex[i]];
-  //   songAcousticness[i] = songAcousticnessAll[subjectindex[i]];
-  //   songDanceability[i] = songDanceabilityAll[subjectindex[i]];
-  //   songEnergy[i] = songEnergyAll[subjectindex[i]];
-  //   songExplicit[i] = songExplicitAll[subjectindex[i]];
-  //   songLiveness[i] = songLivenessAll[subjectindex[i]];
-  //   songLoudness[i] = songLoudnessAll[subjectindex[i]];
-  //   songPopularity[i] = songPopularityAll[subjectindex[i]];
-  //   songSpeechiness[i] = songSpeechinessAll[subjectindex[i]];
-  //   songTempo[i] = songTempoAll[subjectindex[i]];
-  // }
-
-  
 });
 
-//THIS WILL REDRAW THE GRAPH WHEN THE DROPDOWN CHANGES
-//d3.selectAll("body").on("change", updatePlotly);
+  var dropdownButton = d3.select("#selDataset").append("select");
+
+  // When the button is changed, run the updateChart function
+  dropdownButton.on("change", function (d) {
+    d3.csv("clean_data.csv", function (importedData) {
+      // recover the option that has been chosen
+      var songValue = d3.select(this).property("value");
+      console.log(songValue);
+      var artistData = importedData;
+
+      //get band name
+      var bandElement = d3.select("#artist-search");
+      // Get the value property of the input element
+      var band = bandElement.property("value");
+      // run the updateChart function with this selected option
+      console.log(band);
+      songUpdate(band, songValue, artistData);
+    });
+  });
+  
 
 /////////////////////////////////////////////////////////
 /////////////// The Radar Chart Function ////////////////
@@ -532,12 +482,22 @@ function removeOptions(selectElement) {
   }
 }
 
-
 //FUNCTION TO DRAW RADAR AND BAR CHART
-function songUpdate(band, song, data){
+function songUpdate(song) {
+  d3.csv("clean_data.csv", function (importedData) {
+  // Select the band
+  var inputElement = d3.select("#artist-search");
+  // Get the value property of the input element
+  var band = inputElement.property("value");
+  console.log(band);
+
+  // //Select Song
+  // var dropdownButton = d3.select("#selDataset").append("select");
+  // var song = d3.select("#selDataset").property("value");
+  
   var bandID = band;
   var songName = song;
-  var artistData = data;
+  var artistData = importedData;
 
   var bandNameAll = [];
   var songNamesAll = [];
@@ -564,7 +524,7 @@ function songUpdate(band, song, data){
   var songLivenessAvg = [];
   var songLoudnessAvg = [];
   var songPopularityAvg = [];
-  var songSpeechinessAvg= [];
+  var songSpeechinessAvg = [];
   var songTempoAvg = [];
   var subjectindex = [];
   var subjectindexAll = [];
@@ -588,15 +548,17 @@ function songUpdate(band, song, data){
   for (var i = 0; i < artistData.length; i++) {
     if (songNamesAll[i] == songName && bandNameAll[i] == bandID) {
       subjectindex.push(i);
+      i = artistData.length;
     }
   }
+
+  console.log(subjectindex);
 
   for (var i = 0; i < artistData.length; i++) {
     if (bandNameAll[i] == bandID) {
       subjectindexAll.push(i);
     }
   }
-
 
   console.log(subjectindex);
 
@@ -613,7 +575,7 @@ function songUpdate(band, song, data){
   songSpeechiness = songSpeechinessAll[subjectindex];
   songTempo = songTempoAll[subjectindex];
 
-  for (var i = 0; i < subjectindex.length; i++) {
+  for (var i = 0; i < subjectindexAll.length; i++) {
     bandNameAvg[i] = bandNameAll[subjectindexAll[i]];
     songNamesAvg[i] = songNamesAll[subjectindexAll[i]];
     songValenceAvg[i] = songValenceAll[subjectindexAll[i]];
@@ -627,8 +589,9 @@ function songUpdate(band, song, data){
     songSpeechinessAvg[i] = songSpeechinessAll[subjectindexAll[i]];
     songTempoAvg[i] = songTempoAll[subjectindexAll[i]];
   }
-  console.log(songNamesAvg);
-    //////////////////////////////////////////////////////////////
+  console.log(songDanceability);
+  console.log(songDanceabilityAvg);
+  //////////////////////////////////////////////////////////////
   //////////////////////// Set-Up //////////////////////////////
   //////////////////////////////////////////////////////////////
 
@@ -671,7 +634,7 @@ function songUpdate(band, song, data){
       { axis: "Loudness", value: (-songLoudness + 20) / 50 },
       { axis: "Popularity", value: songPopularity / 100 },
       //{ axis: "Speechiness", value: songSpeechiness },
-      { axis: "Tempo", value: songTempo/ 200 },
+      { axis: "Tempo", value: songTempo / 200 },
     ],
   ];
   //////////////////////////////////////////////////////////////
@@ -757,7 +720,7 @@ function songUpdate(band, song, data){
         titleFontSize: 16,
         titleFontColor: "#0066ff",
         bodyFontColor: "#000",
-        bodyFontSize: 14,
+        bodyFontSize: 10,
         displayColors: false,
       },
       scales: {
@@ -768,7 +731,7 @@ function songUpdate(band, song, data){
             },
             ticks: {
               fontColor: "#000",
-              fontSize: 20,
+              fontSize: 14,
             },
           },
         ],
@@ -780,7 +743,7 @@ function songUpdate(band, song, data){
             },
             ticks: {
               fontColor: "#000",
-              fontSize: 20,
+              fontSize: 14,
             },
           },
         ],
@@ -805,6 +768,5 @@ function songUpdate(band, song, data){
       },
     },
   });
-
-
+});
 };

@@ -42,7 +42,7 @@
   <div class="col-md-2" style="margin-top:20px; ">   
     <div class="text-left text-link search-margin">
       <h5 >Artist:</h5>
-      <input class="form-control " id= "artist-search" type="text" placeholder="Led Zeppelin" aria-label="Search">
+      <input class="form-control " id= "artist-search" type="text" placeholder="The Who" aria-label="Search">
       <button id="search-btn" type="artist-button" class="col-md-12 btn btn-primary" style="background: #1DB954;">Search Artist</button>
     </div>
   </div>
@@ -57,7 +57,7 @@
     <br>
     <div class="col-md-12 search-margin">
       <h5 class = "text-left text-link">Song:</h5>
-      <select id="selDataset" onchange="optionChanged(this.value)"></select>
+      <select id="selDataset" onchange="songUpdate(this.value)"></select> 
 
     </div>
   <div class="col-md-5 text-center text-header graph-margin">
