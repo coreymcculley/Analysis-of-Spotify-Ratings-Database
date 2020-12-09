@@ -1,105 +1,119 @@
 
-  var svgWidth = 960;
-  var svgHeight = 500;
 
-  var margin = {
-    top: 20,
-    right: 40,
-    bottom: 100,
-    left: 100
-  };
+// function to initially populate the page with the first subject ID
+function initialDecade() {
 
-  var chartWidth = svgWidth - margin.left - margin.right;
-  var chartHeight = svgHeight - margin.top - margin.bottom;
+  // Get a reference to the subject ID dropdown
+  var decadeDropdown = d3.select("#selDataset");
 
-  // Create an SVG wrapper, append an SVG group that will hold our chart,
-  // and shift the latter by left and top margins.
-  var svg = d3
-    .select("#schart")
-    .append("svg")
-    .attr("width", svgWidth)
-    .attr("height", svgHeight);
+  // // Populate the Subject ID dropdown
+  // d3.csv("clean_data_all.csv").then(function(decadeData) {
+  var decadesList = ["2020", "2010", "2000", "1990", "1980", "1970", "1960", "1950", "1940", "1930", "1920"];
+  //   var decadesList = decadeData.decade;
+  // console.log(decadeData.decade);
 
-  // Append an SVG group
-  var chartGroup = svg.append("g")
-  .attr("transform", `translate(${margin.left}, ${margin.top})`);
+  decadesList.forEach((row) => {
+    decadeDropdown
+      .append("option")
+      .text(row)
+      .property("value", row);
+  });
 
-  // Initial Params
-  var chosenXAxis = "danceability";
+  var decade = decadesList[0];
+  charts(decade);
+  // });
+};
 
-  // function used for updating x-scale var upon click on axis label
-  function xScale(decadeData, chosenXAxis) {
-    // create scales
-    var xLinearScale = d3.scaleLinear()
-      .domain([d3.min(decadeData, d => d[chosenXAxis]) * 0.8,
-        d3.max(decadeData, d => d[chosenXAxis]) * 1.2
-      ])
-      .range([0, chartWidth]);
+// function to handle a change in the decade dropdown 
+function optionChanged(chosenDecade) {
+  charts(chosenDecade);
+};
 
-    return xLinearScale;
+// function used for updating x-scale var upon click on axis label
+function xScale(decadeData, chosenXAxis) {
+  // create scales
+  var xLinearScale = d3.scaleLinear()
+    .domain([d3.min(decadeData, d => d[chosenXAxis]) * 0.8,
+    d3.max(decadeData, d => d[chosenXAxis]) * 1.2
+    ])
+    .range([0, chartWidth]);
 
+  return xLinearScale;
+
+}
+
+// function used for updating xAxis var upon click on axis label
+function renderAxes(newXScale, xAxis) {
+  var bottomAxis = d3.axisBottom(newXScale);
+
+  xAxis.transition()
+    .duration(1000)
+    .call(bottomAxis);
+
+  return xAxis;
+}
+
+// function used for updating circles group with a transition to
+// new circles
+function renderCircles(circlesGroup, newXScale, chosenXaxis) {
+
+  circlesGroup.transition()
+    .duration(1000)
+    .attr("cx", d => newXScale(d[chosenXAxis]));
+
+  return circlesGroup;
+}
+
+// function used for updating circles group with new tooltip
+function updateToolTip(chosenXAxis, circlesGroup) {
+
+  if (chosenXAxis === "danceability") {
+    var label = "Danceability";
+  }
+  else if (chosenXAxis === "energy") {
+    var label = "Energy";
+  }
+  else {
+    var label = "Tempo";
   }
 
-  // function used for updating xAxis var upon click on axis label
-  function renderAxes(newXScale, xAxis) {
-    var bottomAxis = d3.axisBottom(newXScale);
+  var toolTip = d3.tip()
+    .attr("class", "tooltip")
+    .offset([80, -60])
+    .html(function (d) {
+      return (`${d.artists}<br>${d.name}<br>Popularity: ${d.popularity}<br>${label}: ${d[chosenXAxis]}`);
+    });
 
-    xAxis.transition()
-      .duration(1000)
-      .call(bottomAxis);
+  circlesGroup.call(toolTip);
 
-    return xAxis;
-  }
+  circlesGroup.on("mouseover", function (data) {
+    toolTip.show(data);
+  })
+    // onmouseout event
+    .on("mouseout", function (data, index) {
+      toolTip.hide(data);
+    });
 
-  // function used for updating circles group with a transition to
-  // new circles
-  function renderCircles(circlesGroup, newXScale, chosenXaxis) {
+  return circlesGroup;
+}
 
-    circlesGroup.transition()
-      .duration(1000)
-      .attr("cx", d => newXScale(d[chosenXAxis]));
+// Retrieve data from the CSV file and execute everything below
+function charts(inputDecade) {
+  chartGroup.html("");
 
-    return circlesGroup;
-  }
+  d3.csv("clean_data_all.csv").then(function (decadeData) {
 
-  // function used for updating circles group with new tooltip
-  function updateToolTip(chosenXAxis, circlesGroup) {
 
-    if (chosenXAxis === "danceability") {
-      var label = "Danceability";
-    }
-    else if (chosenXAxis === "energy") {
-      var label = "Energy";
-    }
-    else {
-      var label = "Tempo";
-    }
+    // var decades = decadeData.decade;
 
-    var toolTip = d3.tip()
-      .attr("class", "tooltip")
-      .offset([80, -60])
-      .html(function(d) {
-        return (`${d.artists}<br>${d.name}<br>Popularity: ${d.popularity}<br>${label}: ${d[chosenXAxis]}`);
-      });
+    var filteredDecades = decadeData.filter(decadeRange => decadeRange.decade == inputDecade);
+    console.log(filteredDecades);
+    var filtered = filteredDecades[0];
 
-      circlesGroup.call(toolTip);
-
-    circlesGroup.on("mouseover", function(data) {
-      toolTip.show(data);
-    })
-      // onmouseout event
-      .on("mouseout", function(data, index) {
-        toolTip.hide(data);
-      });
-
-    return circlesGroup;
-  }
-
-  // Retrieve data from the CSV file and execute everything below
-  d3.csv("clean_data_all.csv").then(function(decadeData) {
+    // var decadeDrop = d3.select("#selDataset")
 
     // parse data
-    decadeData.forEach(function(data) {
+    filteredDecades.forEach(function (data) {
       data.decade = +data.decade;
       data.popularity = +data.popularity;
       data.danceability = +data.danceability;
@@ -107,12 +121,19 @@
       data.tempo = +data.tempo;
     });
 
+    // data.decade = filtered.decade;
+    // data.popularity = filtered.popularity;
+    // data.danceability = filtered.danceability;
+    // data.energy = filtered.energy;
+    // data.tempo = filtered.tempo;
+
+
     // xLinearScale function above csv import
-    var xLinearScale = xScale(decadeData, chosenXAxis);
+    var xLinearScale = xScale(filteredDecades, chosenXAxis);
 
     // Create y scale function
     var yLinearScale = d3.scaleLinear()
-      .domain([0, d3.max(decadeData, d => d.popularity)])
+      .domain([0, d3.max(filteredDecades, d => d.popularity)])
       .range([chartHeight, 0]);
 
     // Create initial axis functions
@@ -131,7 +152,7 @@
 
     // append initial circles
     var circlesGroup = chartGroup.selectAll("circle")
-      .data(decadeData)
+      .data(filteredDecades)
       .enter()
       .append("circle")
       // .filter(function(d) {return d.popularity >= 70 })
@@ -139,7 +160,7 @@
       // .filter(function(d) {return d.decade == chosenDecade })
       .attr("cx", d => xLinearScale(d[chosenXAxis]))
       .attr("cy", d => yLinearScale(d.popularity))
-      .attr("r", 2)
+      .attr("r", 5)
       .attr("fill", "green")
       .attr("opacity", ".5");
 
@@ -160,7 +181,7 @@
       .attr("value", "energy") // value to grab for event listener
       .classed("inactive", true)
       .text("Energy");
-    
+
     var tempoLengthLabel = labelsGroup.append("text")
       .attr("x", 0)
       .attr("y", 60)
@@ -182,10 +203,10 @@
 
     // x axis labels event listener
     labelsGroup.selectAll("text")
-      .on("click", function() {
+      .on("click", function () {
 
         console.log(chosenXAxis)
-        
+
         // get value of selection
         var value = d3.select(this).attr("value");
         if (value !== chosenXAxis) {
@@ -197,7 +218,7 @@
 
           // functions here found above csv import
           // updates x scale for new data
-          xLinearScale = xScale(decadeData, chosenXAxis);
+          xLinearScale = xScale(filteredDecades, chosenXAxis);
 
           // updates x axis with transition
           xAxis = renderAxes(xLinearScale, xAxis);
@@ -244,41 +265,39 @@
           }
         }
       });
-  }).catch(function(error) {
+  }).catch(function (error) {
     console.log(error);
   });
-
-
-// function to initially populate the page with the first decade
-function initialDecade() {
-
-  // Get a reference to the decade dropdown
-  var dropdown = d3.select("#selDataset");
-
-  // Populate the decade dropdown
-  d3.csv("clean_data_all.csv").then((data) => {
-
-    var decade = ["2020", "2010", "2000", "1990", "1980", "1970", "1960", "1950", "1940", "1930", "1920"];
-
-    decade.forEach((dec) => {
-        dropdown
-        .append("option")
-        .text(dec)
-        .property("value", dec);
-      });
-
-    // console.log(decade)
-
-    var initial = decade[0];
-//     console.log(initial);
-    xScale(initial);
-  });
 };
 
-// // function to handle a change in the decade dropdown 
-function optionChanged(chosenDecade) {
-  xScale(chosenDecade);
+// space for the chart
+var svgWidth = 960;
+var svgHeight = 500;
+
+var margin = {
+  top: 20,
+  right: 40,
+  bottom: 100,
+  left: 100
 };
 
-// Initial load of the charts and metadata panel based on 1st subject ID
+var chartWidth = svgWidth - margin.left - margin.right;
+var chartHeight = svgHeight - margin.top - margin.bottom;
+
+// Create an SVG wrapper, append an SVG group that will hold our chart,
+// and shift the latter by left and top margins.
+var svg = d3
+  .select("#schart")
+  .append("svg")
+  .attr("width", svgWidth)
+  .attr("height", svgHeight);
+
+// Append an SVG group
+var chartGroup = svg.append("g")
+  .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+// Initial Params
+var chosenXAxis = "danceability";
+
+// // Initial load of the charts and metadata panel based on 1st subject ID
 initialDecade();
