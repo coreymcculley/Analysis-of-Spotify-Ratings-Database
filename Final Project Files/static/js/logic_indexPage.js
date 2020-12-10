@@ -63,7 +63,7 @@ d3.csv("df_all_data_w_decades.csv")
 
     // Select body, append SVG area to it, and set the dimensions
     var svg = d3
-      .select("body")
+      .select(".top5chart")
       .append("svg")
       .attr("height", svgHeight)
       .attr("class", "chartsvg")

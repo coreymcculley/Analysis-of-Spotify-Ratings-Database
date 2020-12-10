@@ -34,6 +34,7 @@ h5{
   background-position: 50% 0;
   background-size: cover;
   opacity: 0.3;
+  background: #ededed;
 }
 
 .tooltip {

@@ -18,6 +18,7 @@ body {
 }
 .title {
   text-align: center;
+  color:white;
 }
 .chartsvg {
   display: block;
@@ -29,6 +30,15 @@ body {
   display: block;
 }
 
+.top5chart {
+  background: #ededed;
+  font-weight: bold;
+  color:black;
+  margin-left: 200px;
+  margin-right: 200px;
+  border: 0;
+  border-radius: 5px;
+}
 
 
 .bgimage {
