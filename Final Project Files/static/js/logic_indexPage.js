@@ -44,8 +44,8 @@ d3.csv("df_all_data_w_decades.csv")
     console.log(toptenartistsbydecade);
 
     // Define SVG area dimensions
-    var svgWidth = 1060;
-    var svgHeight = 860;
+    var svgWidth = 1100;
+    var svgHeight = 600;
 
     // Define the chart's margins as an object
     var chartMargin = {
@@ -213,7 +213,7 @@ d3.csv("df_all_data_w_decades.csv")
       // .attr("dy", "1em")
       .attr("class", "axisText")
       .style("text-anchor", "middle")
-      .text("Artist")
+      // .text("Artist")
       .attr("font-weight", "bold");
     // .attr("font-size", 20);
 
@@ -263,7 +263,7 @@ d3.csv("df_all_data_w_decades.csv")
           xscale(Number(maxartistdecade) + 10) - xscale(Number(minartistdecade))
         );
       })
-      .attr("height", 20)
+      .attr("height", 16)
 
       .on("mouseover", function (data) {
         toolTip.show(data, this);

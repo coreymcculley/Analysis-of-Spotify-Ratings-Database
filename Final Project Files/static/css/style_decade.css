@@ -27,7 +27,7 @@ h5{
   z-index: -1;
   display: block;
   width: 600px;
-  height: 400px;
+  height: 800px;
   content: " ";
   background-image: url("maxresdefault.jpg");
   background-repeat: no-repeat;
@@ -44,7 +44,7 @@ h5{
   padding: 2px;
   padding-top: 8px;
   font: 12px helvetica;
-  color: white;
+  color: black;
   text-align: left;
   background: rgb(211, 210, 210);
   border: 0;
@@ -116,6 +116,12 @@ h5{
   color: white;
   font-size: 20;
   margin-left: 100px;
+}
+
+.text-popularity{
+  color: white;
+  font-size: 20;
+  margin-left: 0px;
 }
 
 .text-body{

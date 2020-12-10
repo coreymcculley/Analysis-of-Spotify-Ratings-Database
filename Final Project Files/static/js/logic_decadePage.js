@@ -22,7 +22,7 @@ function initialDecade() {
 // function to handle a change in the decade dropdown 
 function optionChanged(chosenDecade) {
   charts(chosenDecade);
-  makeTable(chosenDecade);
+  //makeTable(chosenDecade);
 };
 
 // function used for updating x-scale var upon click on axis label
@@ -104,7 +104,7 @@ function charts(inputDecade) {
   d3.csv("clean_data_all.csv").then(function (decadeData) {
 
     var filteredDecades = decadeData.filter(decadeRange => decadeRange.Decade == inputDecade);
-    console.log(filteredDecades);
+    //console.log(filteredDecades);
 
     // parse data
     filteredDecades.forEach(function (data) {

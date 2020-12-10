@@ -31,8 +31,8 @@ var tabulate = function (data, columns) {
 }
 
 d3.csv("clean_data_all.csv", function (error, tableData) {
-    if (error) throw error;
-
+    //if (error) throw error;
+    console.log(tableData)
     decadeID = '2000';
     decadeData = tableData.filter(d => d.Decade == decadeID);
 
@@ -40,8 +40,7 @@ d3.csv("clean_data_all.csv", function (error, tableData) {
     top10Songs = decadeData.slice().sort((a, b) => d3.descending(a.Popularity, b.Popularity)).slice(0, 10)
     console.log(top10Songs)
 
-
-    const columns = ['Release_Year', 'Artist_Band', 'Song', 'Genre', 'Popularity']
+    const columns = ['Year', 'Artist', 'Song', 'Genre', 'Popularity']
     tabulate(top10Songs, columns)
 });
 

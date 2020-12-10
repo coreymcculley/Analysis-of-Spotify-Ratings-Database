@@ -9,7 +9,7 @@ body {
 }
 
 .bar:hover {
-  fill: green;
+  fill: #1DB954;
 }
 .tooltip {
   background-color: white;
@@ -81,6 +81,7 @@ body {
 .text-body{
   color: white;
   font-size: 25;
+  margin-left: 100px;
 }
 
 .text-def{
