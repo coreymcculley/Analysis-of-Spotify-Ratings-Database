@@ -1,0 +1,30 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.bar {
+  fill: orange;
+}
+
+.bar:hover {
+  fill: green;
+}
+.tooltip {
+  background-color: white;
+  border: 1px solid black;
+  padding: 16px;
+}
+.title {
+  text-align: center;
+}
+.chartsvg {
+  display: block;
+  margin: auto;
+}
+.tooltipimage {
+  height: 100px;
+  width: 100px;
+  display: block;
+}
