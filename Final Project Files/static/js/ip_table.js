@@ -1,5 +1,5 @@
 var tabulate = function (data, columns) {
-    var table = d3.select('#top10songs-table') // this is the solution
+    var table = d3.select('table') // this is the solution
     // var table = d3.select('body').append('table') this was before the solution
     var thead = table.append('thead')
     var tbody = table.append('tbody')
@@ -30,11 +30,11 @@ var tabulate = function (data, columns) {
     return table;
 }
 
-function makeTable(){
+function makeTable(decade){
     d3.csv("clean_data_all.csv", function (error, tableData) {
         if (error) throw error;
 
-        decadeID = '2000';
+        decadeID = decade;
         decadeData = tableData.filter(d => d.Decade == decadeID);
 
 

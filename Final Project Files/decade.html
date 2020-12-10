@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Spotify Datify: Decades</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./static/css/style_RadarAndBarCharts.css">
+  <link rel="stylesheet" href="./static/css/style_decade.css">
 </head>
 
 <body class="background">
@@ -32,32 +32,33 @@
 
   <h1 class="col-md-12 text-header">Most Popular Artists by Decade</h1>
   
-  <div class="col-md-2">   
-    <div class="text-center text-link">
+  <div class="col-md-2 search-margin">   
+    <div class="text-left text-link">
       <h5>Decade:</h5>
-      <select id="selDataset" onchange="makeTable(this.value)"></select>
+      <select id="selDataset" style="color: black" onchange="optionChanged(this.value)"></select>
     </div>
   </div>
   
 
   <div class="col-md-8 text-center text-header">   
     <h3>Top Ten Songs</h3>
-    <div class="top10songs" id="top10songs">
+    <div class="table" id="table">
     </div>
   </div>
 
   <div class="col-md-12 text-center text-header">   
     <h3>Popularity Factors</h3>
-    <div class="popularity" id="popularity">
-
+    <div id="scatterChart">
     </div>
   </div>
 
+  <script src="https://d3js.org/d3.v5.js"></script>
+  <script src="https://d3js.org/d3-contour.v1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
   <script src="https://kit.fontawesome.com/951076ae2f.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="./static/js/ip_table.js"></script>
-
+  <script src="./static/js/logic_decadePage.js"></script>
 
 </body>
 
