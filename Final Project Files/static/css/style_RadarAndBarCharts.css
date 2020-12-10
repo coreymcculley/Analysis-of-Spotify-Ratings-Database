@@ -89,3 +89,8 @@
   fill: #333333;
   background: #ededed;
 }
+
+.chart-bar {
+  width: 700px;
+  height:400px;
+}

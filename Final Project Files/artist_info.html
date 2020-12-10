@@ -42,14 +42,15 @@
   <div class="col-md-2" style="margin-top:20px; ">   
     <div class="text-left text-link search-margin">
       <h5 >Artist:</h5>
-      <input class="form-control " id= "artist-search" type="text" placeholder="The Who" aria-label="Search">
-      <button id="search-btn" type="artist-button" class="col-md-12 btn btn-primary" style="background: #1DB954;">Search Artist</button>
+      <input class="form-control " id= "artist-search" type="text" onchange="updateBar(this.value)" placeholder="The Who" aria-label="Search">
+      <button id="search-btn" type="artist-button" class="col-md-12 btn btn-primary" style="background: #1DB954;" onchange="updateBar(this.value)">Search Artist</button>
     </div>
   </div>
     
   <div class="col-md-10 text-center text-link graph-margin">   
     <h3>Tracks Released</h3>
-    <div class="tracksReleased" id="tracksReleased">
+    <div class="chart-container" id="trackReleased" style="height: 500px; margin-right: 100px;">
+      <canvas class="chart-bar" id="bar-chart-track" width="100px" height="100px" style="background-color: #FFF;"></canvas>
 
 
     </div>
@@ -69,7 +70,7 @@
   </div>
   <div class="col-md-5 text-center text-header graph-margin">
     <h3>Track Characteristics Plot</h3>
-    <div class="barChart bar">
+    <div class="barchart bar" style="height: 600px">
       <canvas id="bar-chart" width="800" height="800"></canvas>
     </div>
   </div>
@@ -81,7 +82,7 @@
 <script src="https://kit.fontawesome.com/951076ae2f.js" crossorigin="anonymous"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="./static/js/logic_radarAndBarChart.js"></script>
-
+<script src="./static/js/ip_barchart.js"></script>
 
 
 </body>
