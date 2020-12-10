@@ -1,5 +1,3 @@
-
-
 // function to initially populate the page with the first subject ID
 function initialDecade() {
 
@@ -7,10 +5,7 @@ function initialDecade() {
   var decadeDropdown = d3.select("#selDataset");
 
   // // Populate the Subject ID dropdown
-  // d3.csv("clean_data_all.csv").then(function(decadeData) {
   var decadesList = ["2020", "2010", "2000", "1990", "1980", "1970", "1960", "1950", "1940", "1930", "1920"];
-  //   var decadesList = decadeData.decade;
-  // console.log(decadeData.decade);
 
   decadesList.forEach((row) => {
     decadeDropdown
@@ -21,7 +16,7 @@ function initialDecade() {
 
   var decade = decadesList[0];
   charts(decade);
-  // });
+
 };
 
 // function to handle a change in the decade dropdown 
@@ -34,7 +29,7 @@ function xScale(decadeData, chosenXAxis) {
   // create scales
   var xLinearScale = d3.scaleLinear()
     .domain([d3.min(decadeData, d => d[chosenXAxis]) * 0.8,
-    d3.max(decadeData, d => d[chosenXAxis]) * 1.2
+    d3.max(decadeData, d => d[chosenXAxis]) * 1.1
     ])
     .range([0, chartWidth]);
 
@@ -67,13 +62,13 @@ function renderCircles(circlesGroup, newXScale, chosenXaxis) {
 // function used for updating circles group with new tooltip
 function updateToolTip(chosenXAxis, circlesGroup) {
 
-  if (chosenXAxis === "danceability") {
+  if (chosenXAxis === "Danceability") {
     var label = "Danceability";
   }
-  else if (chosenXAxis === "energy") {
+  else if (chosenXAxis === "Energy") {
     var label = "Energy";
   }
-  else if(chosenXAxis === "speechiness") {
+  else if(chosenXAxis === "Speechiness") {
     var label = "Speechiness";
   }
   else {
@@ -85,7 +80,7 @@ function updateToolTip(chosenXAxis, circlesGroup) {
     .attr("class", "tooltip")
     .offset([80, -60])
     .html(function (d) {
-      return (`${d.artists}<br>${d.name}<br>Popularity: ${d.popularity}<br>${label}: ${d[chosenXAxis]}`);
+      return (`${d.Artist}<br>${d.Song}<br>${d.Decade}<br>Popularity: ${d.Popularity}<br>${label}: ${d[chosenXAxis]}`);
     });
 
   circlesGroup.call(toolTip);
@@ -107,23 +102,17 @@ function charts(inputDecade) {
 
   d3.csv("clean_data_all.csv").then(function (decadeData) {
 
-
-    // var decades = decadeData.decade;
-
-    var filteredDecades = decadeData.filter(decadeRange => decadeRange.decade == inputDecade);
+    var filteredDecades = decadeData.filter(decadeRange => decadeRange.Decade == inputDecade);
     console.log(filteredDecades);
-    var filtered = filteredDecades[0];
-
-    // var decadeDrop = d3.select("#selDataset")
 
     // parse data
     filteredDecades.forEach(function (data) {
-      data.decade = +data.decade;
-      data.popularity = +data.popularity;
-      data.danceability = +data.danceability;
-      data.energy = +data.energy;
-      data.speechiness = +data.speechiness;
-      data.tempo = +data.tempo;
+      data.Decade = +data.Decade;
+      data.Popularity = +data.Popularity;
+      data.Danceability = +data.Danceability;
+      data.Energy = +data.Energy;
+      data.Speechiness = +data.Speechiness;
+      data.Tempo = +data.Tempo;
     });
 
     // xLinearScale function above csv import
@@ -131,7 +120,7 @@ function charts(inputDecade) {
 
     // Create y scale function
     var yLinearScale = d3.scaleLinear()
-      .domain([0, d3.max(filteredDecades, d => d.popularity)])
+      .domain([0, d3.max(filteredDecades, d => d.Popularity)])
       .range([chartHeight, 0]);
 
     // Create initial axis functions
@@ -154,7 +143,7 @@ function charts(inputDecade) {
       .enter()
       .append("circle")
       .attr("cx", d => xLinearScale(d[chosenXAxis]))
-      .attr("cy", d => yLinearScale(d.popularity))
+      .attr("cy", d => yLinearScale(d.Popularity))
       .attr("r", 6)
       .attr("fill", "green")
       .attr("opacity", ".3");
@@ -166,28 +155,28 @@ function charts(inputDecade) {
     var danceabilityLengthLabel = labelsGroup.append("text")
       .attr("x", 0)
       .attr("y", 20)
-      .attr("value", "danceability") // value to grab for event listener
+      .attr("value", "Danceability") // value to grab for event listener
       .classed("active", true)
       .text("Danceability");
 
     var energyLengthLabel = labelsGroup.append("text")
       .attr("x", 0)
       .attr("y", 40)
-      .attr("value", "energy") // value to grab for event listener
+      .attr("value", "Energy") // value to grab for event listener
       .classed("inactive", true)
       .text("Energy");
 
     var speechinessLengthLabel = labelsGroup.append("text")
       .attr("x", 0)
       .attr("y", 60)
-      .attr("value", "speechiness") // value to grab for event listener
+      .attr("value", "Speechiness") // value to grab for event listener
       .classed("inactive", true)
       .text("Speechiness");
     
     var tempoLengthLabel = labelsGroup.append("text")
       .attr("x", 0)
       .attr("y", 80)
-      .attr("value", "tempo") // value to grab for event listener
+      .attr("value", "Tempo") // value to grab for event listener
       .classed("inactive", true)
       .text("Tempo");
 
@@ -207,7 +196,7 @@ function charts(inputDecade) {
     labelsGroup.selectAll("text")
       .on("click", function () {
 
-        console.log(chosenXAxis)
+    
 
         // get value of selection
         var value = d3.select(this).attr("value");
@@ -215,10 +204,8 @@ function charts(inputDecade) {
 
           // replaces chosenXAxis with value
           chosenXAxis = value;
+          console.log(chosenXAxis)
 
-          // console.log(chosenXAxis)
-
-          // functions here found above csv import
           // updates x scale for new data
           xLinearScale = xScale(filteredDecades, chosenXAxis);
 
@@ -232,7 +219,7 @@ function charts(inputDecade) {
           circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
 
           // changes classes to change bold text
-          if (chosenXAxis === "danceability") {
+          if (chosenXAxis === "Danceability") {
             danceabilityLengthLabel
               .classed("active", true)
               .classed("inactive", false);
@@ -246,7 +233,7 @@ function charts(inputDecade) {
               .classed("active", false)
               .classed("inactive", true);
           }
-          else if (chosenXAxis === "energy") {
+          else if (chosenXAxis === "Energy") {
             danceabilityLengthLabel
               .classed("active", false)
               .classed("inactive", true);
@@ -260,7 +247,7 @@ function charts(inputDecade) {
               .classed("active", false)
               .classed("inactive", true);
           }
-          else if (chosenXAxis === "speechiness") {
+          else if (chosenXAxis === "Speechiness") {
             danceabilityLengthLabel
               .classed("active", false)
               .classed("inactive", true);
@@ -286,7 +273,7 @@ function charts(inputDecade) {
               .classed("inactive", true);
             tempoLengthLabel
               .classed("active", true)
-              .classed("inactive", true);
+              .classed("inactive", false);
           }
         }
       });
@@ -312,7 +299,7 @@ var chartHeight = svgHeight - margin.top - margin.bottom;
 // Create an SVG wrapper, append an SVG group that will hold our chart,
 // and shift the latter by left and top margins.
 var svg = d3
-  .select("#schart")
+  .select("#scatterChart")
   .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
@@ -322,7 +309,7 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 // Initial Params
-var chosenXAxis = "danceability";
+var chosenXAxis = "Danceability";
 
 // // Initial load of the charts and metadata panel based on 1st subject ID
 initialDecade();
