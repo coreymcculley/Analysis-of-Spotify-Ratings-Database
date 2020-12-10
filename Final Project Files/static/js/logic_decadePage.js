@@ -16,13 +16,14 @@ function initialDecade() {
 
   var decade = decadesList[0];
   charts(decade);
-
+  makeTable(decade);
 };
 
 // function to handle a change in the decade dropdown 
 function optionChanged(chosenDecade) {
   charts(chosenDecade);
-  //makeTable(chosenDecade);
+  clearTable();
+  makeTable(chosenDecade);
 };
 
 // function used for updating x-scale var upon click on axis label
@@ -101,7 +102,7 @@ function updateToolTip(chosenXAxis, circlesGroup) {
 function charts(inputDecade) {
   chartGroup.html("");
 
-  d3.csv("clean_data_all.csv").then(function (decadeData) {
+  d3.csv("clean_data_all.csv", function (decadeData) {
 
     var filteredDecades = decadeData.filter(decadeRange => decadeRange.Decade == inputDecade);
     //console.log(filteredDecades);
@@ -278,9 +279,7 @@ function charts(inputDecade) {
           }
         }
       });
-  }).catch(function (error) {
-    console.log(error);
-  });
+  })
 };
 
 // space for the chart
@@ -311,6 +310,7 @@ var chartGroup = svg.append("g")
 
 // Initial Params
 var chosenXAxis = "Danceability";
+
 
 // // Initial load of the charts and metadata panel based on 1st subject ID
 initialDecade();

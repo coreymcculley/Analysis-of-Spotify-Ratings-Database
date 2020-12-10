@@ -30,7 +30,7 @@ var tabulate = function (data, columns) {
     return table;
 }
 
-d3.csv("clean_data_all.csv", function (error, tableData) {
+d3.csv("clean_data_all.csv", function (tableData) {
     //if (error) throw error;
     console.log(tableData)
     decadeID = '2000';

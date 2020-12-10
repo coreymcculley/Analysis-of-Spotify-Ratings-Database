@@ -157,3 +157,11 @@ h5{
   background: #ededed;
 }
 
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+  color: black;
+  font-size: 16;
+  margin-right: 100px;
+  background: #ededed;
+}
