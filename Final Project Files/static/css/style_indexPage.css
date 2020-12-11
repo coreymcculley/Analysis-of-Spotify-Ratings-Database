@@ -6,7 +6,7 @@ body {
 
 .bar {
   fill: orange;
-}
+} 
 
 .bar:hover {
   fill: #1DB954;
