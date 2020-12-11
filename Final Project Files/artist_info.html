@@ -23,7 +23,7 @@
     <div class="row">
       <div class="col-md-12 jumbotron text-center bgimage">
         <h1>Spotify Top Song Data</h1>
-        <h3>1928-2020</h3>
+        <h3>1920-2020</h3>
         <p>Use the interactive charts below to explore the dataset</p>
       </div>
     </div>
@@ -41,9 +41,9 @@
   
   <div class="col-md-2" style="margin-top:20px; ">   
     <div class="text-left text-link search-margin">
-      <h5 >Artist:</h5>
-      <input class="form-control " id= "artist-search" type="text" onchange="updateBar(this.value)" placeholder="The Who" aria-label="Search">
-      <button id="search-btn" type="artist-button" class="col-md-12 btn btn-primary" style="background: #1DB954;" onchange="updateBar(this.value)">Search Artist</button>
+      <h4>Artist:</h4>
+      <input class="form-control " id= "artist-search" type="text" style="font-size: 18px;" onchange="updateBar(this.value)" placeholder="The Who" aria-label="Search">
+      <button id="search-btn" type="artist-button" class="col-md-12 btn btn-primary" style="background: #1DB954; font-size: 18px;" onchange="updateBar(this.value)">Search Artist</button>
     </div>
   </div>
     
@@ -55,14 +55,14 @@
   </div>
     <br>
     <div class="col-md-12 search-margin">
-      <h5 class = "text-left text-link">Song:</h5>
-      <select id="selDataset" onchange="songUpdate(this.value)"></select> 
+      <h4 class = "text-left text-link">Song:</h4>
+      <select id="selDataset" style="font-size: 16px;" onchange="songUpdate(this.value)"></select> 
 
     </div>
   <div class="col-md-5 text-center text-header graph-margin">
     <h3>Spotify Data Radar Plot</h3>
-    <h5 class = "col-md-6 text-left" style="color:#342ca8;"><b>Average</b></h5>
-    <h5 class = "col-md-6 text-right"style="color: #1DB954"><b>Song</b></h5>
+    <h3 class = "col-md-6 text-left" style="color:#342ca8;"><b>Average</b></h3>
+    <h3 class = "col-md-6 text-right"style="color: #1DB954"><b>Song</b></h3>
     <div class="radarChart" id="radarChart">
     </div>
   </div>
