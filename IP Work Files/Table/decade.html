@@ -4,12 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Spotify Datify</title>
+    <title>Spotify Datify: Decades</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="./static/css/style_indexPage.css" />
+    <!-- <link rel="stylesheet" href="./static/css/style_decade.css" /> -->
+
+    
   </head>
 
   <body class="background">
@@ -17,7 +19,7 @@
       <div class="row">
         <div class="col-md-12 jumbotron text-center bgimage">
           <h1>Spotify Top Song Data</h1>
-          <h3></h3>
+          <h3>1928-2020</h3>
           <p>Use the interactive charts below to explore the dataset</p>
         </div>
       </div>
@@ -51,23 +53,59 @@
       </div>
     </div>
 
-    <h1 class="col-md-12 text-header">Most Popular Artists (1950 – Today)</h1>
-    <hr />
-    <!-- <img class="col-md-12" src="top-sellers-chart.jpg"  width="200px" align="center"> -->
-    <div class="top5decade"></div>
-    <h3 class="title">Top 5 Artists by Decade based on Popularity</h3>
-    <div class="top5chart" id="top5chart"></div>
+    <h1 class="col-md-12 text-header">Spotify Popularity by Decade</h1>
 
+    <div class="col-md-2 search-margin">
+      <div class="text-left text-link">
+        <h5>Decade:</h5>
+        <select
+          id="selDataset"
+          style="color: black"
+          onchange="optionChanged(this.value)"
+        ></select>
+      </div>
+    </div>
 
+    <div class="col-md-12 text-center text-header table">
+      <h3>Top Ten Songs</h3>
+      <div id="table-area" class="">
+        <table id="top10songs-table" class="table table-striped">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-md-12 text-center text-popularity">
+      <h3>Popularity Factors</h3>
+      <div id="scatterChart"></div>
+    </div>
+
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script src="https://d3js.org/d3-contour.v1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
     <script
       src="https://kit.fontawesome.com/951076ae2f.js"
       crossorigin="anonymous"
     ></script>
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
-    <script src="./static/js/logic_indexPage.js"></script>
+    <script src="ip_table.js"></script>
+    <!-- <script src="./static/js/logic_decadePage.js"></script> -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script>
+  
+  
+
+<!-- D3 JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script>
+
+<!-- Chart.js JavaScript -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
+
+
+<!-- Our JavaScript -->
+<script type="text/javascript" src="ip_table.js"></script>
   </body>
+
   <!-- Footer -->
   <footer class="page-footer col-md-12 font-small pt-4">
     <!-- Copyright -->
@@ -81,5 +119,4 @@
     </div>
     <!-- Copyright -->
   </footer>
-  <!-- Footer -->
 </html>
