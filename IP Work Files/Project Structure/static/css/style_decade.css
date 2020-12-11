@@ -1,0 +1,167 @@
+h1{
+  font-size: 24px;
+  color: black;
+  font-weight: bold;
+  font-family: helvetica;
+  text-align: center;
+}
+
+h2{
+  font-size: 18px;
+  color: black;
+  font-family: helvetica;
+  text-align: left;
+}
+
+h5{
+  font-size: 15px;
+  color: white;
+  font-family: helvetica;
+  text-align: left;
+}
+
+.chart::before {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  z-index: -1;
+  display: block;
+  width: 600px;
+  height: 800px;
+  content: " ";
+  background-image: url("maxresdefault.jpg");
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  background-size: cover;
+  opacity: 0.3;
+  background: #ededed;
+}
+
+.tooltip {
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  padding: 2px;
+  padding-top: 8px;
+  font: 12px helvetica;
+  color: black;
+  text-align: left;
+  background: rgb(211, 210, 210);
+  border: 0;
+  border-radius: 5px;
+}
+
+.axis-text {
+  font-family: helvetica;
+  font-weight: bold;
+  fill: white;
+  text-anchor: middle;
+}
+
+.active {
+  font-family: helvetica;
+  font-weight: bold;
+  fill: #000;
+  fill: white;
+  transition: fill 0.3s ease-out;
+  text-anchor: middle;
+}
+
+.inactive {
+  font-weight: lighter;
+  font-family: helvetica;
+  fill: gray;
+  transition: fill 0.3s ease-out;
+  text-anchor: middle;
+}
+
+.inactive:hover {
+  fill: orangered;
+  cursor: pointer;
+}
+
+
+.bgimage {
+  position: relative;
+  height: 350px;
+  padding: 20px;
+  margin: 20px;
+  background: white;
+  background-image: url("../../spotify-theme-music-bkg-dark.jpg");
+  /* background-attachment: fixed; */
+  background-position: bottom center;
+  background-size: cover;
+  color:white;
+}
+
+.btn-style {
+  width: 250px;
+  /* padding: 5px; */
+  background: #1DB954;
+  font-weight: bold;
+  color:white;
+}
+
+.graph-margin{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.search-margin{
+  margin-top: 50px;
+  margin-left: 50px;
+}
+
+.text-header{
+  color: white;
+  font-size: 20;
+  margin-left: 100px;
+}
+
+.text-popularity{
+  color: white;
+  font-size: 20;
+  margin-left: 0px;
+}
+
+.text-body{
+  color: white;
+  font-size: 25;
+}
+
+.text-def{
+  color: white;
+  margin-top: 25px;
+}
+
+.text-margin{
+  margin-left: 200px;
+  margin-right: 200px;
+
+}
+
+.text-link{
+  color: white;
+  font-size: 40;
+}
+
+.background{
+  background: #1d1e22;
+}
+
+
+
+
+.bar {
+  fill: #333333;
+  background: #ededed;
+}
+
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+  color: black;
+  font-size: 16;
+  margin-right: 100px;
+  background: #ededed;
+}

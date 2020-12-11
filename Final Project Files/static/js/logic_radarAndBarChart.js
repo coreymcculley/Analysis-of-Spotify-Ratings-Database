@@ -16,7 +16,7 @@ d3.csv("clean_data.csv", function (importedData) {
   var button = d3.select("#search-btn");
   //filter data based on user input
   button.on("click", function () {
-    filteredData = [];
+
     d3.event.preventDefault();
     // Select the input element and get the raw HTML node
     var inputElement = d3.select("#artist-search");
@@ -44,12 +44,6 @@ d3.csv("clean_data.csv", function (importedData) {
     removeOptions(document.getElementById("selDataset"));
     buildDropDown(songList);
     updateBar(inputValue);
-    // var songElement = d3.select("#selDataset");
-    // // Get the value property of the input element
-    // var songValue = songElement.property("value");
-    // console.log(songValue);
-
-    //d3.selectAll("selDataset").on("change", songUpdate(inputValue, songValue, artistData));
 
     if (Object.keys(filterIndex).length === 0) {
       errorPopup();

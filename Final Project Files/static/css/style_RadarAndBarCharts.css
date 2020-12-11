@@ -83,11 +83,15 @@
 .radarChart {
     fill: #333333;
     background: #ededed;
+    border: 0;
+    border-radius: 5px;
 }
 
 .bar {
   fill: #333333;
   background: #ededed;
+  border: 0;
+  border-radius: 5px;
 }
 
 .chart-bar {
