@@ -82,3 +82,40 @@ def by_decades(Decade):
     response = jsonify(songs_by_decade)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return(response)
+
+
+#Route fot data by individual Artist
+@app.route("/by_artist_song/<Artist>/<Song>")
+def by_artist_song(Artist, Song):
+    session = Session(engine)
+
+    results3 = session.query(songsDB.Decade, songsDB.Year, songsDB.Song, songsDB.Artist, songsDB.Valence, songsDB.Acousticness, songsDB.Danceability, songsDB.Energy,
+                             songsDB.Explicit, songsDB.Liveness, songsDB.Loudness, songsDB.Popularity, songsDB.Speechiness, songsDB.Tempo).filter(songsDB.Artist == Artist).filter(songsDB.Song == Song).all()
+    session.close()
+
+    songs_by_artist = []
+    for Decade, Year, Song, Artist, Valence, Acousticness, Danceability, Energy, Explicit, Liveness, Loudness, Popularity, Speechiness, Tempo in results3:
+        songs_data_dict = {}
+        songs_data_dict["Decade"] = Decade
+        songs_data_dict["Year"] = Year
+        songs_data_dict["Song"] = Song
+        songs_data_dict["Artist"] = Artist
+        songs_data_dict["Valence"] = Valence
+        songs_data_dict["Acousticness"] = Acousticness
+        songs_data_dict["Danceability"] = Danceability
+        songs_data_dict["Energy"] = Energy
+        songs_data_dict["Explicit"] = Explicit
+        songs_data_dict["Liveness"] = Liveness
+        songs_data_dict["Loudness"] = Loudness
+        songs_data_dict["Popularity"] = Popularity
+        decade_data_dict["Speechiness"] = Speechiness
+        songs_data_dict["Tempo"] = Tempo
+
+        songs_by_artist.append(songs_data_dict)
+
+    response = jsonify(songs_by_artist)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return(response)
+
+if __name__ == '__main__':
+app.run(debug=True, port=5000)
