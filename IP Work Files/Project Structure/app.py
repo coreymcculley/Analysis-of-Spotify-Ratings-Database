@@ -1,3 +1,6 @@
+################### FLASK APP ####################
+
+# Importing Libraries
 import os
 import numpy as np
 
@@ -8,6 +11,8 @@ from sqlalchemy import create_engine
 from flask import Flask, jsonify, render_template
 from config import username, password
 
+
+# Creating Engine and Connecting to PostgreSQL DB
 engine = create_engine(
     f"postgres://{username}:{password}@localhost:5432/spotifyDB")
 
@@ -16,15 +21,16 @@ Base.prepare(engine, reflect=True)
 session = Session(engine)
 songsDB = Base.classes.songs
 
-
 app = Flask(__name__)
 
 
+# Route to Index.html
 @app.route("/")
 def homepage():
     return render_template("index.html")
 
 
+# Route for BarChart - "Top Songs Released by Artist"
 @app.route("/songs_released/<Artist>")
 def songs_released(Artist):
     session = Session(engine)
@@ -46,6 +52,7 @@ def songs_released(Artist):
     return(response)
 
 
+# Route for data by decades
 @app.route("/by_decades/<Decade>")
 def by_decades(Decade):
     session = Session(engine)
@@ -78,7 +85,8 @@ def by_decades(Decade):
     return(response)
 
 
-@app.route("/by_artist_song/<Artist>/<Song>")
+    #Route fot data by individual Artist
+    @app.route("/by_artist_song/<Artist>/<Song>")
 def by_artist_song(Artist, Song):
     session = Session(engine)
 
@@ -109,7 +117,3 @@ def by_artist_song(Artist, Song):
     response = jsonify(songs_by_artist)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return(response)
-
-
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
