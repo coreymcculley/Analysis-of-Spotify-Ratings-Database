@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Spotify Datify</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./static/css/style_indexPage.css" />
+  </head>
+
+  <body class="background">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 jumbotron text-center bgimage">
+          <h1>Spotify Top Song Data</h1>
+          <h3></h3>
+          <p>Use the interactive charts below to explore the dataset</p>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="col-4">
+          <a
+            type="button"
+            class="btn btn-primary btn-lg btn-style"
+            href="index.html"
+            >Home Page</a
+          >
+          <a
+            type="button"
+            class="btn btn-primary btn-lg btn-style"
+            href="decade.html"
+            >Popularity by Decade</a
+          >
+          <a
+            type="button"
+            class="btn btn-primary btn-lg btn-style"
+            href="artist_info.html"
+            >Artist Information</a
+          >
+          <a
+            type="button"
+            class="btn btn-primary btn-lg btn-style"
+            href="spotify_definitions.html"
+            >Characteristic Details</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <h1 class="col-md-12 text-header">Most Popular Artists (1950 – Today)</h1>
+    <hr />
+    <!-- <img class="col-md-12" src="top-sellers-chart.jpg"  width="200px" align="center"> -->
+    <div class="top5decade"></div>
+    <h3 class="title">Top 5 Artists by Decade</h3>
+    <div class="top5chart" id="top5chart"></div>
+
+
+    <script
+      src="https://kit.fontawesome.com/951076ae2f.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+    <script src="./static/js/logic_indexPage.js"></script>
+  </body>
+  <!-- Footer -->
+  <footer class="page-footer col-md-12 font-small pt-4">
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3" style="color: #1db954">
+      <i class="fab fa-spotify"></i>
+      <a style="color: #1db954" href="https://spotify.com">Spotify | </a>
+      © 2020 Copyright:
+      <a style="color: #1db954" href="https://mdbootstrap.com/">
+        MDBootstrap.com</a
+      >
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+</html>
