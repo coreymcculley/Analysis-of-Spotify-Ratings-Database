@@ -29,6 +29,7 @@ h5{
   width: 600px;
   height: 800px;
   content: " ";
+  color: #1DB954;
   background-image: url("maxresdefault.jpg");
   background-repeat: no-repeat;
   background-position: 50% 0;
@@ -54,7 +55,8 @@ h5{
 .axis-text {
   font-family: helvetica;
   font-weight: bold;
-  fill: white;
+  fill: black;
+  color: black;
   text-anchor: middle;
 }
 
@@ -62,7 +64,7 @@ h5{
   font-family: helvetica;
   font-weight: bold;
   fill: #000;
-  fill: white;
+  fill: #1DB954;
   transition: fill 0.3s ease-out;
   text-anchor: middle;
 }
@@ -121,7 +123,6 @@ h5{
 .text-popularity{
   color: white;
   font-size: 20;
-  margin-left: 0px;
 }
 
 .text-body{
@@ -149,9 +150,6 @@ h5{
   background: #1d1e22;
 }
 
-
-
-
 .bar {
   fill: #333333;
   background: #ededed;
@@ -164,4 +162,15 @@ table.center {
   font-size: 16;
   margin-right: 100px;
   background: #ededed;
+}
+
+th {
+  text-align: center;
+
+}
+
+svg {
+  background:#ededed;
+  border: 0;
+  border-radius: 5px;
 }
