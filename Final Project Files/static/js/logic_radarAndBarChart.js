@@ -1,36 +1,49 @@
 //function init() {
-d3.csv("clean_data.csv", function (importedData) {
-  var song = "Pinball Wizard";
-  var bandID = "The Who";
+// var inputElement = d3.select("#artist-search");
+// var artist_id = inputElement.property("value");
+// // var song_id = document.getElementById('selDataset').value;
+// const url = 'http://127.0.0.1:5000/by_artist_song/' + artist_id;
+// d3.json((url), function (importedData) {
+// var song = "Pinball Wizard";
+// var bandID = "The Who";
 
-  artistData = [];
-  var artistData = importedData; //.filter(function(d){ return  (d.artists == bandID)});
-  //console.log(artistData);
+// artistData = [];
+// var artistData = importedData; //.filter(function(d){ return  (d.artists == bandID)});
+// console.log(artistData);
 
-  songUpdate(song); //bandID, song, artistData
-  // var filterData = artistData.filter(function(d){ return  (d.artists == bandID)});
-  // console.log(filterData);
+// songUpdate(song); //bandID, song, artistData
+// var filterData = artistData.filter(function(d){ return  (d.artists == bandID)});
+// console.log(filterData);
 
-  //Get input from the text box, filter for the matching dates and output table of results.
-  //Also include an error popup if searched data does not match the anything in the provided data.
-  var button = d3.select("#search-btn");
-  //filter data based on user input
-  button.on("click", function () {
+//Get input from the text box, filter for the matching dates and output table of results.
+//Also include an error popup if searched data does not match the anything in the provided data.
+var button = d3.select("#search-btn");
+//filter data based on user input
+button.on("click", function () {
 
-    d3.event.preventDefault();
-    // Select the input element and get the raw HTML node
-    var inputElement = d3.select("#artist-search");
-    // Get the value property of the input element
-    var inputValue = inputElement.property("value");
-    console.log(inputValue);
+  d3.event.preventDefault();
+  // Select the input element and get the raw HTML node
+  var inputElement = d3.select("#artist-search");
+  // Get the value property of the input element
+  var artist_id = inputElement.property("value");
+  console.log(artist_id);
+
+  const url = 'http://127.0.0.1:5000/by_artist_song/' + artist_id;
+  d3.json((url), function (importedData) {
+    // var song = "Pinball Wizard";
+    // var bandID = "The Who";
+
+    artistData = [];
+    var artistData = importedData; //.filter(function(d){ return  (d.artists == bandID)});
+    console.log(artistData);
 
     var filteredData = [];
     for (var i = 0; i < artistData.length; i++) {
-      filteredData[i] = artistData[i].artists;
+      filteredData[i] = artistData[i].Artist;
     }
     var filterIndex = [];
     for (var i = 0; i < artistData.length; i++) {
-      if (filteredData[i] == inputValue) {
+      if (filteredData[i] == artist_id) {
         filterIndex.push(i);
       }
     }
@@ -38,12 +51,12 @@ d3.csv("clean_data.csv", function (importedData) {
     var songList = [];
     for (var i = 0; i < filterIndex.length; i++) {
       filteredDB[i] = artistData[filterIndex[i]];
-      songList[i] = artistData[filterIndex[i]].name;
+      songList[i] = artistData[filterIndex[i]].Song;
     }
-    //console.log(songList);
+    console.log(songList);
     removeOptions(document.getElementById("selDataset"));
     buildDropDown(songList);
-    updateBar(inputValue);
+    updateBar(artist_id);
 
     if (Object.keys(filterIndex).length === 0) {
       errorPopup();
@@ -118,8 +131,8 @@ function RadarChart(id, data, options) {
   // );
 
   var allAxis = data[0].map(function (i, j) {
-      return i.axis;
-    }), //Names of each axis
+    return i.axis;
+  }), //Names of each axis
     total = allAxis.length, //The number of different axes
     radius = Math.min(cfg.w / 2, cfg.h / 2), //Radius of the outermost circle
     Format = d3.format("%"), //Percentage formatting
@@ -148,10 +161,10 @@ function RadarChart(id, data, options) {
     .attr(
       "transform",
       "translate(" +
-        (cfg.w / 2 + cfg.margin.left) +
-        "," +
-        (cfg.h / 2 + cfg.margin.top) +
-        ")"
+      (cfg.w / 2 + cfg.margin.left) +
+      "," +
+      (cfg.h / 2 + cfg.margin.top) +
+      ")"
     );
 
   /////////////////////////////////////////////////////////
@@ -477,7 +490,9 @@ function removeOptions(selectElement) {
 
 //FUNCTION TO DRAW RADAR AND BAR CHART
 function songUpdate(song) {
-  d3.csv("clean_data.csv", function (importedData) {
+  var artist_id = document.getElementById('artist-search').value;
+  const url = 'http://127.0.0.1:5000/by_artist_song/' + artist_id;
+  d3.json((url), function (importedData) {
     // Select the band
     var inputElement = d3.select("#artist-search");
     // Get the value property of the input element
@@ -523,18 +538,18 @@ function songUpdate(song) {
     var subjectindexAll = [];
 
     for (var i = 0; i < artistData.length; i++) {
-      bandNameAll[i] = artistData[i].artists;
-      songNamesAll[i] = artistData[i].name;
-      songValenceAll[i] = artistData[i].energy;
-      songAcousticnessAll[i] = artistData[i].acousticness;
-      songDanceabilityAll[i] = artistData[i].danceability;
-      songEnergyAll[i] = artistData[i].energy;
-      songExplicitAll[i] = artistData[i].explicit;
-      songLivenessAll[i] = artistData[i].liveness;
-      songLoudnessAll[i] = artistData[i].loudness;
-      songPopularityAll[i] = artistData[i].popularity;
-      songSpeechinessAll[i] = artistData[i].speechiness;
-      songTempoAll[i] = artistData[i].tempo;
+      bandNameAll[i] = artistData[i].Artist;
+      songNamesAll[i] = artistData[i].Song;
+      songValenceAll[i] = artistData[i].Energy;
+      songAcousticnessAll[i] = artistData[i].Acousticness;
+      songDanceabilityAll[i] = artistData[i].Danceability;
+      songEnergyAll[i] = artistData[i].Energy;
+      songExplicitAll[i] = artistData[i].Explicit;
+      songLivenessAll[i] = artistData[i].Liveness;
+      songLoudnessAll[i] = artistData[i].Loudness;
+      songPopularityAll[i] = artistData[i].Popularity;
+      songSpeechinessAll[i] = artistData[i].Speechiness;
+      songTempoAll[i] = artistData[i].Tempo;
     }
     //console.log(songNamesAll.length);
 
@@ -588,7 +603,7 @@ function songUpdate(song) {
     //////////////////////// Set-Up //////////////////////////////
     //////////////////////////////////////////////////////////////
 
-    var margin = { top: 90, right:  200, bottom: 60, left: 90 },
+    var margin = { top: 90, right: 200, bottom: 60, left: 90 },
       legendPosition = { x: 0, y: 0 },
       width =
         Math.min(700, window.innerWidth - 10) - margin.left - margin.right,

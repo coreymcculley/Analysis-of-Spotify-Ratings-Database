@@ -1,5 +1,7 @@
-function updateBar(band){
-    d3.csv("clean_data_all.csv", function (getData) {
+function updateBar(band) {
+    var artist_id = document.getElementById('artist-search').value;
+    const url = 'http://127.0.0.1:5000/songs_released/' + artist_id;
+    d3.json((url), function (getData) {
         var songData = [];
         songData = getData;
         console.log(songData)
@@ -66,12 +68,12 @@ function updateBar(band){
                 maintainAspectRatio: false,
                 tooltips: {
                     callbacks: {
-                      title: function (tooltipItem, data) {
-                        return data["labels"][tooltipItem[0]["index"]];
-                      },
-                      label: function (tooltipItem, data) {
-                        return data["datasets"][0]["data"][tooltipItem["index"]];
-                      },
+                        title: function (tooltipItem, data) {
+                            return data["labels"][tooltipItem[0]["index"]];
+                        },
+                        label: function (tooltipItem, data) {
+                            return data["datasets"][0]["data"][tooltipItem["index"]];
+                        },
                     },
                     backgroundColor: "#FFF",
                     titleFontSize: 16,
@@ -79,7 +81,7 @@ function updateBar(band){
                     bodyFontColor: "#000",
                     bodyFontSize: 16,
                     displayColors: false,
-                  },
+                },
                 scales: {
                     xAxes: [{
                         gridLines: {

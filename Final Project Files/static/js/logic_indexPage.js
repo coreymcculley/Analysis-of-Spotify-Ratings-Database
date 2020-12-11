@@ -181,9 +181,8 @@ d3.csv("df_all_data_w_decades.csv")
         let artistname = d;
         artistname = artistname.replaceAll("['", "");
         artistname = artistname.replaceAll("']", "");
-        return `<img class="tooltipimage" src= "${
-          artistimages[artistname]
-        }">${artistname}<br>${minartistdecade} - ${maxartistdecade + 10}`;
+        return `<img class="tooltipimage" src= "${artistimages[artistname]
+          }">${artistname}<br>${minartistdecade} - ${maxartistdecade + 10}`;
       });
 
     // Create tooltip in the chart

@@ -70,11 +70,11 @@ function updateToolTip(chosenXAxis, circlesGroup) {
   else if (chosenXAxis === "Energy") {
     var label = "Energy";
   }
-  else if(chosenXAxis === "Speechiness") {
+  else if (chosenXAxis === "Speechiness") {
     var label = "Speechiness";
   }
   else {
-      var label = "Tempo";
+    var label = "Tempo";
 
   }
 
@@ -102,7 +102,9 @@ function updateToolTip(chosenXAxis, circlesGroup) {
 function charts(inputDecade) {
   chartGroup.html("");
 
-  d3.csv("clean_data_all.csv", function (decadeData) {
+  var decade_id = document.getElementById('selDataset').value;
+  const url = 'http://127.0.0.1:5000/by_decades/' + decade_id;
+  d3.json((url), function (decadeData) {
 
     var filteredDecades = decadeData.filter(decadeRange => decadeRange.Decade == inputDecade);
     //console.log(filteredDecades);
@@ -174,7 +176,7 @@ function charts(inputDecade) {
       .attr("value", "Speechiness") // value to grab for event listener
       .classed("inactive", true)
       .text("Speechiness");
-    
+
     var tempoLengthLabel = labelsGroup.append("text")
       .attr("x", 0)
       .attr("y", 80)
@@ -198,7 +200,7 @@ function charts(inputDecade) {
     labelsGroup.selectAll("text")
       .on("click", function () {
 
-    
+
 
         // get value of selection
         var value = d3.select(this).attr("value");
