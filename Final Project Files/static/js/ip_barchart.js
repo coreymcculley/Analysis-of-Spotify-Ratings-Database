@@ -1,5 +1,5 @@
 function updateBar(band){
-    d3.csv("clean_data_all.csv", function (getData) {
+    d3.csv("../data/clean_data_all.csv", function (getData) {
 
         var songData = [];
         songData = getData;
