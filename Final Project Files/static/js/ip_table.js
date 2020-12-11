@@ -31,7 +31,7 @@ var tabulate = function (data, columns) {
 }
 
 function makeTable(decade){
-  d3.csv("clean_data_all.csv", function (tableData) {
+  d3.csv("../data/clean_data_all.csv", function (tableData) {
     //if (error) throw error;
     console.log(tableData)
     decadeID = decade;

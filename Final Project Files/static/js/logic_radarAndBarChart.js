@@ -477,6 +477,7 @@ function removeOptions(selectElement) {
 
 //FUNCTION TO DRAW RADAR AND BAR CHART
 function songUpdate(song) {
+
   d3.csv("clean_data.csv", function (importedData) {
     // Select the band
     var inputElement = d3.select("#artist-search");
