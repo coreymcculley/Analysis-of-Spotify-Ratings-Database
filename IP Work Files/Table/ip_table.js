@@ -41,7 +41,7 @@ d3.csv("clean_data_all.csv", function (error, tableData) {
     console.log(top10Songs)
 
 
-    const columns = ['Release_Year', 'Artist_Band', 'Song', 'Genre', 'Popularity']
+    const columns = ['Year', 'Artist', 'Song', 'Genre', 'Popularity']
     tabulate(top10Songs, columns)
 });
 
