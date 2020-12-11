@@ -47,7 +47,7 @@ function makeTable(decade){
 };
 
 function clearTable(){
-  var tableHeaderRowCount = 1;
+  var tableHeaderRowCount = 0;
   var table = document.getElementById('top10songs-table');
   var rowCount = table.rows.length;
   for (var i = tableHeaderRowCount; i < rowCount; i++) {
