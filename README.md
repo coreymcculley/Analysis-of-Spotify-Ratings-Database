@@ -16,6 +16,7 @@ placeholder - link to deployed site
 placeholder  - detailed instructions on how to recreate the environment and database (with scripts)
 
 ### Entity Relationship Diagram
-placeholder for the ERD image
+[Entity Relationship Diagram](https://github.com/coreymcculley/Rice-Boot-Camp-Project-2/blob/main/Project%202%20-%20Group%204%20-%20Database%20ERD.jpg)
+
 
 
