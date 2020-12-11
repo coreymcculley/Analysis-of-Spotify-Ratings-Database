@@ -51,7 +51,7 @@ def songs_released(Artist):
     return(response)
 
 
-    # Route for data by decades
+# Route for data by decades
 @app.route("/by_decades/<Decade>")
 def by_decades(Decade):
     session = Session(engine)
@@ -84,7 +84,7 @@ def by_decades(Decade):
     return(response)
 
 
-#Route fot data by individual Artist
+#Route for data by individual Artist
 @app.route("/by_artist_song/<Artist>/<Song>")
 def by_artist_song(Artist, Song):
     session = Session(engine)
@@ -108,12 +108,33 @@ def by_artist_song(Artist, Song):
         songs_data_dict["Liveness"] = Liveness
         songs_data_dict["Loudness"] = Loudness
         songs_data_dict["Popularity"] = Popularity
-        decade_data_dict["Speechiness"] = Speechiness
+        songs_data_dict["Speechiness"] = Speechiness
         songs_data_dict["Tempo"] = Tempo
 
         songs_by_artist.append(songs_data_dict)
 
     response = jsonify(songs_by_artist)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return(response)
+
+
+#Route for Top-5 Artists by Decade
+@app.route("/top5artist")
+def top5artist(Artist, Decade):
+    session = Session(engine)
+
+    results4 = session.query(songsDB.Decade, songsDB.Artist).all()
+    session.close()
+
+    artist_by_decade = []
+    for Decade, Artist in results4:
+        top5artist_dict = {}
+        top5artist_dict["Decade"] = Decade
+        top5artist_dict["Artist"] = Artist
+
+        artist_by_decade.append(top5artist_dict)
+
+    response = jsonify(artist_by_decade)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return(response)
 
