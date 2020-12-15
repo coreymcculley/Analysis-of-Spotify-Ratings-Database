@@ -1,5 +1,5 @@
 // Load data from spotify.csv
-d3.csv("df_all_data_w_decades.csv")
+d3.csv("../../clean_data_all.csv")
   .then(function (musicData) {
     var artistcountbydecade = {};
     musicData.forEach((data) => {
