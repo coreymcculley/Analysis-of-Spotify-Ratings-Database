@@ -9,8 +9,14 @@ Project 2 explores Spotify data for 150,000+ songs released from 1921 - 2020.  V
 * Which song characteristics impact popularity?
 * What are the song characteristics typically used by each artist?
 
-### Link to Deployment
-placeholder - link to deployed site
+### Coding Approach
+* CSV data loaded into Postgres database using Python
+* Visualizations developed with:
+* JavaScript
+* Chart.js 
+* D3.js 
+* Website built using HTML / CSS
+* Python Flask Restful API
 
 ### Deployment Instructions
 placeholder  - detailed instructions on how to recreate the environment and database (with scripts)
